@@ -28,7 +28,7 @@ Helst hdmi- og strøm-uttak på langsiden av skjermen, hvis det er mulig.
 Strømforbruk: 0.5A ish sier stackexchange
 
 *** TODO micro-SD-kort, gjerne med litt hastighet, minst 8gb
-Litt hastighet betyr helst klasse 10 eller bedre, sjekk tabellen [[https://www.sdcard.org/consumers/choices/speed_class/img/video_speed%20class_01.jpg][her]]
+Litt hastighet betyr helst klasse 10 eller bedre, sjekk tabellen [[https://www.sdcard.org/consumers/choices/speed_class/img/video_speed%20class_01.jpg][her]].
 Helst inkludert en overgang fra microSD til vanlig SD, for kobling til PC
 
 *** TODO USB til SD-kort-leser
