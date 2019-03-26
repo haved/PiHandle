@@ -4,15 +4,16 @@
 ** TODO Finne ut størrelse på skjermen
 ** TODO Skrive kerf-justere-program
 ** TODO Kjøpe materialer og elektronikk
-* Materialer
-** DONE 3.3mm akryl
+* Produktbesktivelse
+** Materialer
+*** DONE 3.3mm akryl
 Fra verkstedet
-** TODO gjengstang M4 130mm
-** TODO 2x M4 låsemuttere (ca. 5.5mm tykke)
-** TODO Gummiknotter
+*** TODO gjengstang M4 130mm
+*** TODO 2x M4 låsemuttere (ca. 5.5mm tykke)
+*** TODO Gummiknotter
 Små møbelknotter med lim på éne siden. Minst mulig tykkelse, så lenge diameteren er < 1cm
-* Elektronikk
-** TODO Raspberry Pi
+** Elektronikk
+*** TODO Raspberry Pi
 Her fungerer begge deler, hver med sine sider.
 I svakt prioritert rekkefølge:
 *** Model B+
@@ -22,28 +23,29 @@ Strømbruk: 0.5A - 1.0A [m/tastatur,mus og WiFi]
 Mindre enn Model B+ men svakere. Like mange GPIO-pins. Skjermen er uansett det store.
 Strømforbruk: Mindre enn Model B+, hvertfall
 
-** TODO Raspberry Pi skjerm
+*** TODO Raspberry Pi skjerm
 Helst 5 tommer, 7 tommer funker hvis det er raskere å få tak i.
 Helst hdmi- og strøm-uttak på langsiden av skjermen, hvis det er mulig.
 Strømforbruk: 0.5A ish sier stackexchange
 
-** TODO micro-SD-kort, gjerne med litt hastighet, minst 8gb
+*** TODO micro-SD-kort, gjerne med litt hastighet, minst 8gb
 Helst inkludert en overgang fra microSD til vanlig SD, for kobling til PC
 
-** TODO USB til SD-kort-leser
+*** TODO USB til SD-kort-leser
 Må kunne programmeres fra PC, og jeg fakket opp laptoppens innebygde :)
-** TODO 100 Dioder
+*** TODO 100 Dioder
 Snakk om bare 5V gjennom en motstand på 30k-100k Ohm, så helt vanlige småstrømdioder gjør susen
-** DONE ~2.1A powerbank
+*** DONE ~2.1A powerbank
 Jeg har én som er 6700mAh
-** DONE 3 trykknapper
+*** DONE 3 trykknapper
    CLOSED: [2019-03-26 Tue 19:55]
-* CAD
-** Lage 3D model
-** Lage 2D svg
+** CAD
+*** Lage 3D model
+*** Lage 2D svg
 ** Kerfjusteringer
-* Laserkutt
-** DONE Kerftest 3.3mm akryl
-* Software
-** TODO SvgKerfer
+** Laserkutt
+*** DONE Kerftest 3.3mm akryl
+** Software
+*** TODO SvgKerfer
 *** Lage test-svg fra FreeCAD
+*** TODO Operativsystem
