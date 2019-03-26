@@ -1,0 +1,21 @@
+* Materials
+** 3.3mm acryllic
+** gjengstang M4 130mm
+** 2x M4 locknuts (ca. 5.5mm thick)
+* Electronics
+** Raspberry Pi Model B+
+Power usage: 0.5A - 1.0A [with keyboard, mouse and WiFi]
+** Raspberry Pi Screen 5inch (7inch in a pinch),
+Preferably with power- and hdmi-connectors on the longest side.
+The 7" official screen has this, in addition to a separate driver board one can place anywhere.
+A 5" screen as a Pi shield with a tiny hdmi jumper would be good, though.
+Power usage: 0.5A ish says stackexchange
+** ~2.1A powerbank
+I have one that is 6700mAh
+* CAD
+** Make 3D model
+** Make 2D svg
+** Kerf adjust
+* Laser cut
+** DONE Kerf test 3.3mm acryllic
+* Software
