@@ -1,21 +1,49 @@
-* Materials
-** 3.3mm acryllic
-** gjengstang M4 130mm
-** 2x M4 locknuts (ca. 5.5mm thick)
-* Electronics
-** Raspberry Pi Model B+
-Power usage: 0.5A - 1.0A [with keyboard, mouse and WiFi]
-** Raspberry Pi Screen 5inch (7inch in a pinch),
-Preferably with power- and hdmi-connectors on the longest side.
-The 7" official screen has this, in addition to a separate driver board one can place anywhere.
-A 5" screen as a Pi shield with a tiny hdmi jumper would be good, though.
-Power usage: 0.5A ish says stackexchange
-** ~2.1A powerbank
-I have one that is 6700mAh
+* Å gjøre:
+** TODO Finne ut om Raspberry Pi blir 3B+ eller Zero W
+** TODO Finne ut om Pien skal være under eller med skjermen
+** TODO Finne ut størrelse på skjermen
+** TODO Skrive kerf-justere-program
+** TODO Kjøpe materialer og elektronikk
+* Materialer
+** DONE 3.3mm akryl
+Fra verkstedet
+** TODO gjengstang M4 130mm
+** TODO 2x M4 låsemuttere (ca. 5.5mm tykke)
+** TODO Gummiknotter
+Små møbelknotter med lim på éne siden. Minst mulig tykkelse, så lenge diameteren er < 1cm
+* Elektronikk
+** TODO Raspberry Pi
+Her fungerer begge deler, hver med sine sider.
+I svakt prioritert rekkefølge:
+*** Model B+
+Strømbruk: 0.5A - 1.0A [m/tastatur,mus og WiFi]
+
+*** Zero W
+Mindre enn Model B+ men svakere. Like mange GPIO-pins. Skjermen er uansett det store.
+Strømforbruk: Mindre enn Model B+, hvertfall
+
+** TODO Raspberry Pi skjerm
+Helst 5 tommer, 7 tommer funker hvis det er raskere å få tak i.
+Helst hdmi- og strøm-uttak på langsiden av skjermen, hvis det er mulig.
+Strømforbruk: 0.5A ish sier stackexchange
+
+** TODO micro-SD-kort, gjerne med litt hastighet, minst 8gb
+Helst inkludert en overgang fra microSD til vanlig SD, for kobling til PC
+
+** TODO USB til SD-kort-leser
+Må kunne programmeres fra PC, og jeg fakket opp laptoppens innebygde :)
+** TODO 100 Dioder
+Snakk om bare 5V gjennom en motstand på 30k-100k Ohm, så helt vanlige småstrømdioder gjør susen
+** DONE ~2.1A powerbank
+Jeg har én som er 6700mAh
+** DONE 3 trykknapper
+   CLOSED: [2019-03-26 Tue 19:55]
 * CAD
-** Make 3D model
-** Make 2D svg
-** Kerf adjust
-* Laser cut
-** DONE Kerf test 3.3mm acryllic
+** Lage 3D model
+** Lage 2D svg
+** Kerfjusteringer
+* Laserkutt
+** DONE Kerftest 3.3mm akryl
 * Software
+** TODO SvgKerfer
+*** Lage test-svg fra FreeCAD
