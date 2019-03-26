@@ -16,10 +16,9 @@ Små møbelknotter med lim på éne siden. Minst mulig tykkelse, så lenge diame
 *** TODO Raspberry Pi
 Her fungerer begge deler, hver med sine sider.
 I svakt prioritert rekkefølge:
-**** Model B+
+ - Model B+
 Strømbruk: 0.5A - 1.0A [m/tastatur,mus og WiFi]
-
-**** Zero W
+ - Zero W
 Mindre enn Model B+ men svakere. Like mange GPIO-pins. Skjermen er uansett det store.
 Strømforbruk: Mindre enn Model B+, hvertfall
 
@@ -29,10 +28,11 @@ Helst hdmi- og strøm-uttak på langsiden av skjermen, hvis det er mulig.
 Strømforbruk: 0.5A ish sier stackexchange
 
 *** TODO micro-SD-kort, gjerne med litt hastighet, minst 8gb
+Litt hastighet betyr helst klasse 10 eller bedre, sjekk tabellen [[https://www.sdcard.org/consumers/choices/speed_class/img/video_speed%20class_01.jpg][her]]
 Helst inkludert en overgang fra microSD til vanlig SD, for kobling til PC
 
 *** TODO USB til SD-kort-leser
-Må kunne programmeres fra PC, og jeg fakket opp laptoppens innebygde :)
+SD-kortet som kjøpes må kunne programmeres fra PC, og jeg fakket opp laptoppens innebygde SD-leser :)
 *** TODO 100 Dioder
 Snakk om bare 5V gjennom en motstand på 30k-100k Ohm, så helt vanlige småstrømdioder gjør susen
 *** DONE ~2.1A powerbank
