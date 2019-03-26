@@ -16,10 +16,10 @@ Små møbelknotter med lim på éne siden. Minst mulig tykkelse, så lenge diame
 *** TODO Raspberry Pi
 Her fungerer begge deler, hver med sine sider.
 I svakt prioritert rekkefølge:
-*** Model B+
+**** Model B+
 Strømbruk: 0.5A - 1.0A [m/tastatur,mus og WiFi]
 
-*** Zero W
+**** Zero W
 Mindre enn Model B+ men svakere. Like mange GPIO-pins. Skjermen er uansett det store.
 Strømforbruk: Mindre enn Model B+, hvertfall
 
@@ -36,15 +36,18 @@ Må kunne programmeres fra PC, og jeg fakket opp laptoppens innebygde :)
 *** TODO 100 Dioder
 Snakk om bare 5V gjennom en motstand på 30k-100k Ohm, så helt vanlige småstrømdioder gjør susen
 *** DONE ~2.1A powerbank
-Jeg har én som er 6700mAh
+Jeg har to som er 6700mAh hver
 *** DONE 3 trykknapper
    CLOSED: [2019-03-26 Tue 19:55]
+Jeg har hjemme
 ** CAD
 *** Lage 3D model
 *** Lage 2D svg
 ** Kerfjusteringer
 ** Laserkutt
 *** DONE Kerftest 3.3mm akryl
+Resultater: 3% speed, 100% power, 50% frequency, kerf:0.28mm
+
 ** Software
 *** TODO SvgKerfer
 *** Lage test-svg fra FreeCAD
