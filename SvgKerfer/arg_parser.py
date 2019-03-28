@@ -111,7 +111,9 @@ class ArgParser:
                     break
 
             if not used:
-                self.the_rest.push(arg)
+                if arg.startswith("-"):
+                    error("Unknown option '", arg, "'", sep="")
+                self.the_rest += [arg]
 
     def get_the_rest(self):
         return self.the_rest
@@ -127,3 +129,36 @@ class ArgParser:
             print("\t", " \t".join([row[i].ljust(widths[i]) for i in range(3)]), sep="")
         print()
         exit(exit_code)
+
+from os import listdir
+from os.path import join, isfile, isdir
+
+def matches(name, fltr):
+    if fltr == "*":
+        return True
+    if "*" in fltr:
+        error("To be implemented: * wildcard support")
+    return name==fltr
+
+def wd_and_codes_to_paths(paths, file_code):
+    if "/" in file_code:
+        direc, rest = file_code.split("/", 1)
+        if len(direc) == 0:
+            return wd_and_codes_to_paths(contenders, rest)
+        if direc == "**":
+            error("To be implemented: **/ folder wildcard support")
+
+        new_wds = []
+        for wd in paths:
+            new_wds += [join(wd, fil) for fil in listdir(wd) if matches(fil, direc)]
+        return wd_and_codes_to_paths(filter(isdir, new_wds), rest)
+    else:
+        files = []
+        for wd in paths:
+            files += [join(wd, fil) for fil in listdir(wd) if matches(fil, file_code)]
+        return list(filter(isfile, files))
+
+def file_code_to_file_paths(file_code):
+    if file_code.startswith("/"):
+        return wd_and_codes_to_paths(["/"], file_code[1:])
+    return wd_and_codes_to_paths(["."], file_code)
