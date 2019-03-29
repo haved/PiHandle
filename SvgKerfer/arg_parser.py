@@ -4,6 +4,11 @@ def error(*a, **aa):
     print(*a, **aa)
     exit(1)
 
+def warning(*a, **aa):
+    print("Warning:", end=' ')
+    print(*a, **aa)
+
+
 class BaseOption:
     def __init__(self, names):
         self.names = names
@@ -35,7 +40,7 @@ class NormalOption(BaseOption):
             return self.custom_func(args)
 
         if self.allow_multiple:
-            self.values.push(args)
+            self.values.append(args)
         else:
             self.values = args
 
@@ -69,11 +74,12 @@ class DictOption(BaseOption):
         if len(split) != 2:
             error("Expected an '=' between key an value in '", option_name, "' option. Got: '", arg, "'", sep="")
         key_str, val_str = split
-        key = self.key_func(key_str)
-        val = self.val_func(val_str)
+        key = self.key_parser(key_str)
+        val = self.val_parser(val_str)
         if key in self.dikt:
-            error("Duplicate definiton of '", key, "'", "for option '", option_name, "'", sep="")
+            error("Duplicate definiton of '", key_str, "' for option '", option_name, "'", sep="")
         self.dikt[key] = val
+        return 1
 
     def get_help_row(self):
         return [", ".join(self.names), self.key_name+"="+self.val_name, self.desc]
@@ -104,7 +110,7 @@ class ArgParser:
                     subargs_wanted = o.get_desired_args()
                     if len(args) < subargs_wanted:
                         error("Option '", arg, "' requires ", subargs_wanted, " parameters, ", len(args), " were given")
-                    used_c = o.call(arg, args)
+                    used_c = o.call(arg, args[:subargs_wanted])
                     used_c = used_c if used_c else 0
                     args = args[used_c:]
                     used = True
@@ -129,36 +135,3 @@ class ArgParser:
             print("\t", " \t".join([row[i].ljust(widths[i]) for i in range(3)]), sep="")
         print()
         exit(exit_code)
-
-from os import listdir
-from os.path import join, isfile, isdir
-
-def matches(name, fltr):
-    if fltr == "*":
-        return True
-    if "*" in fltr:
-        error("To be implemented: * wildcard support")
-    return name==fltr
-
-def wd_and_codes_to_paths(paths, file_code):
-    if "/" in file_code:
-        direc, rest = file_code.split("/", 1)
-        if len(direc) == 0:
-            return wd_and_codes_to_paths(contenders, rest)
-        if direc == "**":
-            error("To be implemented: **/ folder wildcard support")
-
-        new_wds = []
-        for wd in paths:
-            new_wds += [join(wd, fil) for fil in listdir(wd) if matches(fil, direc)]
-        return wd_and_codes_to_paths(filter(isdir, new_wds), rest)
-    else:
-        files = []
-        for wd in paths:
-            files += [join(wd, fil) for fil in listdir(wd) if matches(fil, file_code)]
-        return list(filter(isfile, files))
-
-def file_code_to_file_paths(file_code):
-    if file_code.startswith("/"):
-        return wd_and_codes_to_paths(["/"], file_code[1:])
-    return wd_and_codes_to_paths(["."], file_code)
