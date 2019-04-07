@@ -1,2 +1,2 @@
 #!/bin/bash
-pipenv run python svgkerfer.py "$@"
+pipenv run python src/svgkerfer.py "$@"

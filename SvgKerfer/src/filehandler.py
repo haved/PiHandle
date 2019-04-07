@@ -1,7 +1,7 @@
 
-from os.path import isfile, isdir, normcase, normpath, abspath, join, basename, split
+from os.path import isfile, isdir, normcase, normpath, abspath, join, basename, split, splitext
 from os import walk
-from arg_parser import error, warning
+from logger import *
 
 def get_input_output_list(files, recursive, output):
     input_files = []
@@ -40,7 +40,7 @@ def get_input_output_list(files, recursive, output):
         if "%" in output and ".." in inp:
             error("Can't use % formating in output when input files are outside of cwd:", fil)
         direc, fil = split(inp)
-        return output.replace("%", join(direc, basename(fil)))
+        return output.replace("%", join(direc, splitext(basename(fil))[0]))
 
     return [(inp,output_of_input(inp)) for inp in input_files]
 

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 from sys import argv
 from arg_parser import *
+from logger import *
 from filehandler import get_input_output_list
+from svg_parser import paths_of_svg
 
 outdef = "kerfed/%.svg"
 
@@ -19,3 +21,4 @@ io = get_input_output_list(parser.get_the_rest(), recursive=recursive.is_set(), 
 
 for inp, out in io:
     print(inp, "->", out)
+    paths = paths_of_svg(inp)

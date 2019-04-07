@@ -7,7 +7,8 @@ verify_ssl = true
 
 [packages]
 svglib = "*"
-tinycss2 = "*"
+numpy = "*"
+lxml = "*"
 
 [requires]
 python_version = "3.7"
