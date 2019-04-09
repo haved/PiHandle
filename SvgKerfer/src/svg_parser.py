@@ -45,7 +45,67 @@ def parse_transform(text, linenum):
     return trans
 
 def parse_paths(text, transform, linenum):
-    return []
+    result = []
+
+    parts = re.findall(r"[0-9]*\.?[0-9]*|[A-Za-z]", text)
+
+    current_path_start = [0,0]
+    current_path_lines = []
+
+    def finish_path(connect):
+        nonlocal current_path_lines, current_coord
+        if len(current_path_lines) != 0:
+            result.append(Path(current_path_start, current_path_lines, connect, transform))
+            current_path_lines = []
+        if connect:
+            current_coord = current_path_start
+
+    current_coord = [0,0]
+
+    float_stack = []
+    def pop_coord(relative=False):
+        nonlocal float_stack, current_coord
+        x, y, *float_stack = float_stack
+        return [x + current_coord[0], y + current_coord[1]] if relative else [x, y]
+
+    for p in parts[::-1]:
+        relative = p.islower()
+        cmd = p.lower()
+
+        if cmd == "m":
+            current_coord = pop_coord(relative)
+            finish_path(False) #We finish any path we might be currently doing
+            current_path_start = current_coord
+            cmd = "l"
+
+        if cmd == "z":
+            finish_path(True)
+        elif cmd == "l":
+            while len(float_stack) >= 2:
+                coord = pop_coord(relative)
+                diff = np.subtract(coord, current_coord)
+                current_path_lines.append(StraightLine(diff))
+                current_coord = coord
+        elif cmd == "h":
+            while len(float_stack) >= 1:
+                x, *float_stack = float_stack
+                line_len = x if relative else x-current_coord[0]
+                current_path_lines.append(StraightLine([line_len, 0]))
+                current_coord[0] += line_len
+        elif cmd == "v":
+            while len(float_stack) >= 1:
+                y, *float_stack = float_stack
+                line_len = y if relative else x-current_coord[1]
+                current_path_lines.append(StraightLine([0, line_len]))
+                current_coord[1] += line_len
+        elif cmd == "c" or cmd=="s" or cmd=="q" or cmd=="t" or cmd=="a":
+            pass
+        elif p != "":
+            float_stack.insert(0, float(p))
+
+    finish_path(False)
+
+    return result
 
 def get_floats(attr, *names):
     def pf(val):
@@ -89,8 +149,8 @@ def extract_paths(parent_transform, dom):
             result.append(Path(start_point, lines, True, transform))
         elif tag == "polygon" or tag == "polyline":
             points = attr.get("points", "")
-            coords = re.findall(r"[0-9]*\.[0-9]*", points)
-            coords = [float(x) for x in coords]
+            coords = re.findall(r"[0-9]*\.?[0-9]*", points)
+            coords = [float(x) for x in coords if x != ""]
             if len(coords) < 2:
                 continue
             coords = zip(coords[::2], coords[1::2])
