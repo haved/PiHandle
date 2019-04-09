@@ -103,6 +103,8 @@ def extract_paths(transform, dom):
             p1 = [x1, y1]
             p2 = [x2, y2]
             result.append(Path(p1, [StraightLine(np.sub(p2,p1))], transform, False))
+        elif tag == "title":
+            print(child.sourceline, ": <title>",child.text,"</title>",sep="")
         else:
             warning("Ignoring tag:", tag)
 
