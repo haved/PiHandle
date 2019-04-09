@@ -8,21 +8,13 @@ class Polyline:
         self.connected = connected
 
 def dist(p1, p2):
-    return norm(p1-p2)
+    return norm(np.subtract(p1,p2))
 
 def transform(trans, p):
-    #print("Transform:", trans)
-    #print("Start:", p)
     p = np.append(p, 1)
-    #p = np.transpose(p)
-    #print("Her:", p)
     p = np.dot(trans, p)
-    #print("Nå:", p)
-    #p = np.transpose(p)
-    #print("Etter:", p)
-    p = p[:2]
-    #print("Ferdig:", p)
-    return p
+    p = np.asarray(p).reshape(-1)
+    return p[:2]
 
 def polyline_of_path(path, granularity):
     points = []
@@ -41,7 +33,9 @@ def polyline_of_path(path, granularity):
     if path.connected:
         points = [p for p,p2 in zip(points, points[1:]+points[:1]) if dist(p, p2)>granularity/10]
     else:
-        points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>granularity/10]+points[-1]
+        last_point = points[-1]
+        points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>granularity/10]
+        points.append(last_point)
 
     return Polyline(points, path.connected)
 

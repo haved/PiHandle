@@ -2,7 +2,6 @@ from lxml import etree
 import numpy as np
 from arg_parser import warning, error
 from inspect import signature, Parameter
-from math import tan, cos, sin, radians
 from maths import *
 from path import *
 import re
@@ -16,7 +15,7 @@ def get_pos_or_error(text, needle, pos, linenum):
 def parse_transform(text, linenum):
     trans = np.identity(3)
 
-    ops = [matrix, translate, rotate, skewX, skewY]
+    ops = [matrix, translate, rotate, scale, skewX, skewY]
 
     progress = 0
     while True:
@@ -35,9 +34,9 @@ def parse_transform(text, linenum):
 
         params_taken = signature(op_func).parameters.values()
         maxArgs = len(params_taken)
-        minArgs = sum(1 for x in params_taken if x.default!=Parameter.empty)
+        minArgs = sum(1 for x in params_taken if x.default==Parameter.empty)
         if len(vals) < minArgs or len(vals) > maxArgs:
-            error(linenum, ": Wrong amount of parameters given to ", op.__name__, ". Got ", len(vals), " wanted ", minArgs, "-", maxArgs, sep="")
+            error(linenum, ": Wrong amount of parameters given to ", op_func.__name__, ". Got ", len(vals), " wanted ", minArgs, "-", maxArgs, sep="")
 
         trans = trans @ op_func(*vals)
 
@@ -53,13 +52,15 @@ def get_floats(attr, *names):
         return float(val)
     return [pf(attr.get(x, "0")) for x in names]
 
-def extract_paths(transform, dom):
+def extract_paths(parent_transform, dom):
     result = []
 
     for child in dom:
+        if child.tag is etree.Comment:
+            continue
         tag = child.tag.split("}")[-1]
         attr = child.attrib
-        transform = transform.dot(parse_transform(attr.get("transform", ""), child.sourceline))
+        transform = parent_transform.dot(parse_transform(attr.get("transform", ""), child.sourceline))
         if tag == "g":
             result += extract_paths(transform, child) #TODO: Check matrix mul order
         elif tag == "circle":
@@ -102,7 +103,7 @@ def extract_paths(transform, dom):
             x1, y1, x2, y2 = get_floats(attr, "x1", "y1", "x2", "y2")
             p1 = [x1, y1]
             p2 = [x2, y2]
-            result.append(Path(p1, [StraightLine(np.sub(p2,p1))], transform, False))
+            result.append(Path(p1, [StraightLine(np.subtract(p2,p1))], False, transform))
         elif tag == "title":
             print(child.sourceline, ": <title>",child.text,"</title>",sep="")
         else:
