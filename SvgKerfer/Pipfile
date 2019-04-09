@@ -9,6 +9,7 @@ verify_ssl = true
 svglib = "*"
 numpy = "*"
 lxml = "*"
+tkinter = "*"
 
 [requires]
 python_version = "3.7"

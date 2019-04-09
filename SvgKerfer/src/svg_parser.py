@@ -102,7 +102,7 @@ def extract_paths(transform, dom):
 
 def paths_of_svg_file(filename):
     with open(filename) as xml:
-        root = etree.fromstring(xml.read())
+        root = etree.parse(xml).getroot()
 
     paths = extract_paths(np.identity(3), root)
     return paths
