@@ -1,14 +1,14 @@
-import Tkinter
+import matplotlib.pyplot as plt
+
+def plot(p1, p2):
+    plt.plot([p1[0], p2[0]], [p1[1], p2[1]])
 
 def draw_polylines(polylines):
-    window = Tkinter.Tk()
-    canva = Tkinter.Canvas(window)
-
     for line in polylines:
-        for p1, p2 in zip(line.lines, line.lines[:1]):
-            canva.create_line(*p1, *p2)
+        for p1, p2 in zip(line.points, line.points[1:]):
+            plot(p1, p2)
         if line.connected:
-            canva.create_line(*line.lines[-1], *line.lines[0])
+            plot(line.points[-1], line.points[0])
 
-    canva.pack()
+    plt.show()
 

@@ -43,7 +43,7 @@ def polyline_of_path(path, granularity):
     else:
         points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>granularity/10]+points[-1]
 
-    return points
+    return Polyline(points, path.connected)
 
 def polylines_of_paths(paths, granularity):
     return [polyline_of_path(path, granularity) for path in paths]

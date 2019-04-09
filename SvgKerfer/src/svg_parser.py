@@ -5,6 +5,7 @@ from inspect import signature, Parameter
 from math import tan, cos, sin, radians
 from maths import *
 from path import *
+import re
 
 def get_pos_or_error(text, needle, pos, linenum):
     found = text.find(needle, pos)
@@ -44,6 +45,9 @@ def parse_transform(text, linenum):
 
     return trans
 
+def parse_paths(text, transform, linenum):
+    return []
+
 def get_floats(attr, *names):
     def pf(val):
         return float(val)
@@ -82,18 +86,23 @@ def extract_paths(transform, dom):
             if has_rounded_corners:
                 lines.append(Arc([rx, -ry], rx, ry, False, False))
             result.append(Path(start_point, lines, True, transform))
-        elif tag == "polygon":
+        elif tag == "polygon" or tag == "polyline":
             points = attr.get("points", "")
-            trans = attr.get("transform", "")
-            #TODO
+            coords = re.findall(r"[0-9]*\.[0-9]*", points)
+            coords = [float(x) for x in coords]
+            if len(coords) < 2:
+                continue
+            coords = zip(coords[::2], coords[1::2])
+            lines = [StraightLine(np.sub(p2,p1)) for p1,p2 in zip(coords, coords[1:])]
+            result.append(Path(coords[0], lines, transform, tag=="polygon"))
         elif tag == "path":
             d = attr.get("d", "")
-            trans = attr.get("transform", "")
-            #TODO
+            result += parse_paths(d, transform, child.sourceline)
         elif tag == "line":
-            warning("Ignoring line") #TODO
-        elif tag == "polyline":
-            warning("Ignoring polyline") #TODO
+            x1, y1, x2, y2 = get_floats(attr, "x1", "y1", "x2", "y2")
+            p1 = [x1, y1]
+            p2 = [x2, y2]
+            result.append(Path(p1, [StraightLine(np.sub(p2,p1))], transform, False))
         else:
             warning("Ignoring tag:", tag)
 
