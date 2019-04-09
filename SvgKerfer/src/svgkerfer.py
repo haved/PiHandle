@@ -3,7 +3,8 @@ from sys import argv
 from arg_parser import *
 from logger import *
 from filehandler import get_input_output_list
-from svg_parser import paths_of_svg
+from svg_parser import paths_of_svg_file
+from liner import polylines_of_paths
 
 outdef = "kerfed/%.svg"
 
@@ -21,4 +22,4 @@ io = get_input_output_list(parser.get_the_rest(), recursive=recursive.is_set(), 
 
 for inp, out in io:
     print(inp, "->", out)
-    paths = paths_of_svg(inp)
+    paths = paths_of_svg_file(inp)

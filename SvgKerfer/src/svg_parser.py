@@ -3,9 +3,8 @@ import numpy as np
 from arg_parser import warning, error
 from inspect import signature, Parameter
 from math import tan, cos, sin, radians
-
-# We only care about paths, and ignore stroke width and don't keep transformations
-# The path is a list of tuples of the form (char, *data)
+from maths import *
+from path import *
 
 def get_pos_or_error(text, needle, pos, linenum):
     found = text.find(needle, pos)
@@ -15,26 +14,6 @@ def get_pos_or_error(text, needle, pos, linenum):
 
 def parse_transform(text, linenum):
     trans = np.identity(3)
-
-    def matrix(a, b, c, d, e, f):
-        return np.matrix([[a, b, c], [d, e, f], [0, 0, 1]])
-    def translate(x, y=0):
-        return np.matrix([[1, 0, x], [0, 1, y], [0, 0, 1]])
-    def scale(sx, sy=None):
-        if sy == None:
-            sy = sx
-        return np.matrix([[sx, 0, 0], [0, sy, 0], [0, 0, 1]])
-    def rotate(a, cx=0, cy=0):
-        if cx != 0 or xy != 0:
-            return translate(cx, cy) @ rotate(a) @ translate(-cx, -cy)
-        a = radians(a)
-        return np.matrix([[cos(a), -sin(a), 0], [sin(a), cos(a), 0], [0, 0, 1]])
-    def skewX(a):
-        a = radians(a)
-        return np.matrix([[1, tan(a), 0], [0, 1, 0], [0, 0, 1]])
-    def skewY(a):
-        a = radians(a)
-        return np.matrix([[1, 0, 0], [tan(a), 1, 0], [0, 0, 1]])
 
     ops = [matrix, translate, rotate, skewX, skewY]
 
@@ -65,38 +44,44 @@ def parse_transform(text, linenum):
 
     return trans
 
+def get_floats(attr, *names):
+    def pf(val):
+        return float(val)
+    return [pf(attr.get(x, "0")) for x in names]
+
 def extract_paths(transform, dom):
     result = []
 
     for child in dom:
         tag = child.tag.split("}")[-1]
         attr = child.attrib
+        transform = transform.dot(parse_transform(attr.get("transform", ""), child.sourceline))
         if tag == "g":
-            transform_str = attr.get("transform", "")
-            trans = parse_transform(transform_str, child.sourceline)
-            result += extract_paths(transform.dot(trans), child) #TODO: Check matrix mul order
+            result += extract_paths(transform, child) #TODO: Check matrix mul order
         elif tag == "circle":
-            cx = attr.get("cx", 0)
-            cy = attr.get("cy", 0)
-            r = attr.get("r", 0)
-            trans = attr.get("transform", "")
-            #TODO
+            cx, cy, r = get_floats(attr, "cx", "cy", "r")
+            result.append(Path([cx+r, cy], Arc([0, 0], r, r, True, True), True, transform))
         elif tag == "ellipse":
-            cx = attr.get("cx", 0)
-            cy = attr.get("cy", 0)
-            rx = attr.get("rx", 0)
-            ry = attr.get("ry", 0)
-            trans = attr.get("transform", "")
-            #TODO
+            cx, cy, rx, ry = extract_paths(attr, "cx", "cy", "rx", "ry")
+            result.append(Path([cx+r, cy], Arc([0, 0], rx, ry, True, True), True, transform))
         elif tag == "rect":
-            x = attr.get("x", 0)
-            y = attr.get("y", 0)
-            width = attr.get("width", 0)
-            height = attr.get("height", 0)
-            rx = attr.get("rx", 0)
-            ry = attr.get("ry", 0)
-            trans = attr.get("transform", "")
-            #TODO
+            x, y, width, height, rx, ry = get_floats(attr, "x", "y", "width", "height", "rx", "ry")
+            has_rounded_corners = "rx" in attr or "ry" in attr
+            lines = []
+            start_point = [x+rx, y]
+            lines.append(StraightLine([width-rx*2, 0]))
+            if has_rounded_corners:
+                lines.append(Arc([rx, ry], rx, ry, False, False))
+            lines.append(StraightLine([0, height-ry*2]))
+            if has_rounded_corners:
+                lines.append(Arc([-rx, ry], rx, ry, False, False))
+            lines.append(StraightLine([-width+rx*2, 0]))
+            if has_rounded_corners:
+                lines.append(Arc([-rx, -ry], rx, ry, False, False))
+            lines.append(StraightLine([0, -height+ry*2]))
+            if has_rounded_corners:
+                lines.append(Arc([rx, -ry], rx, ry, False, False))
+            result.append(Path(start_point, lines, True, transform))
         elif tag == "polygon":
             points = attr.get("points", "")
             trans = attr.get("transform", "")
@@ -106,19 +91,19 @@ def extract_paths(transform, dom):
             trans = attr.get("transform", "")
             #TODO
         elif tag == "line":
-            warning("Ignoring line")
+            warning("Ignoring line") #TODO
         elif tag == "polyline":
-            warning("Ignoring polyline")
+            warning("Ignoring polyline") #TODO
         else:
             warning("Ignoring tag:", tag)
 
     return result
 
 
-def paths_of_svg(filename):
+def paths_of_svg_file(filename):
     with open(filename) as xml:
         root = etree.fromstring(xml.read())
 
-    polygons = extract_paths(np.identity(3), root)
-    return polygons
+    paths = extract_paths(np.identity(3), root)
+    return paths
 
