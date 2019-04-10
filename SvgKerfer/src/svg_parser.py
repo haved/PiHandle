@@ -62,18 +62,40 @@ def parse_paths(text, transform, linenum):
 
     current_coord = [0,0]
 
-    float_stack = []
-    def pop_coord(relative=False):
-        nonlocal float_stack, current_coord
-        x, y, *float_stack = float_stack
+    parts = list(filter(lambda x:x!="", parts))
+
+    def pop_part():
+        nonlocal parts
+        if len(parts) == 0:
+            return None
+        ret, *parts = parts
+        return ret
+
+    def get_float_opt():
+        nonlocal parts
+        if len(parts) == 0:
+            return None
+        try:
+            front, *rest = parts
+            front = float(front)
+            parts = rest
+            return front
+        except:
+            return None
+
+    def get_coord_opt(relative=False):
+        x, y = [get_float_opt(), get_float_opt()]
+        if x == None or y == None:
+            return None
         return [x + current_coord[0], y + current_coord[1]] if relative else [x, y]
 
-    for p in parts[::-1]:
+    while len(parts):
+        p = pop_part()
         relative = p.islower()
         cmd = p.lower()
 
         if cmd == "m":
-            current_coord = pop_coord(relative)
+            current_coord = get_coord_opt(relative)
             finish_path(False) #We finish any path we might be currently doing
             current_path_start = current_coord
             cmd = "l"
@@ -81,27 +103,35 @@ def parse_paths(text, transform, linenum):
         if cmd == "z":
             finish_path(True)
         elif cmd == "l":
-            while len(float_stack) >= 2:
-                coord = pop_coord(relative)
+            while True:
+                coord = get_coord_opt(relative)
+                if not coord:
+                    break
+
                 diff = np.subtract(coord, current_coord)
                 current_path_lines.append(StraightLine(diff))
                 current_coord = coord
+
         elif cmd == "h":
-            while len(float_stack) >= 1:
-                x, *float_stack = float_stack
+            while True:
+                x = get_float_opt()
+                if not coord:
+                    break
                 line_len = x if relative else x-current_coord[0]
                 current_path_lines.append(StraightLine([line_len, 0]))
                 current_coord[0] += line_len
         elif cmd == "v":
-            while len(float_stack) >= 1:
-                y, *float_stack = float_stack
-                line_len = y if relative else x-current_coord[1]
+            while True:
+                y = get_float_opt()
+                if not coord:
+                    break
+                line_len = y if relative else y-current_coord[1]
                 current_path_lines.append(StraightLine([0, line_len]))
                 current_coord[1] += line_len
         elif cmd == "c" or cmd=="s" or cmd=="q" or cmd=="t" or cmd=="a":
             pass
-        elif p != "":
-            float_stack.insert(0, float(p))
+        else:
+            warning(linenum, ": Ignoring path data: ", p, sep="")
 
     finish_path(False)
 
