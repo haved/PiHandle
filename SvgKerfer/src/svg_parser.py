@@ -47,7 +47,7 @@ def parse_transform(text, linenum):
 def parse_paths(text, transform, linenum):
     result = []
 
-    parts = re.findall(r"[0-9]*\.?[0-9]*|[A-Za-z]", text)
+    parts = re.findall(r"-?[0-9]*\.?[0-9]*|[A-Za-z]", text)
 
     current_path_start = [0,0]
     current_path_lines = []
@@ -179,13 +179,13 @@ def extract_paths(parent_transform, dom):
             result.append(Path(start_point, lines, True, transform))
         elif tag == "polygon" or tag == "polyline":
             points = attr.get("points", "")
-            coords = re.findall(r"[0-9]*\.?[0-9]*", points)
-            coords = [float(x) for x in coords if x != ""]
+            coords = re.findall(r"-?[0-9]*\.?[0-9]*", points)
+            coords = [float(x) for x in coords if x != "" and x != "-"]
             if len(coords) < 2:
                 continue
-            coords = zip(coords[::2], coords[1::2])
-            lines = [StraightLine(np.sub(p2,p1)) for p1,p2 in zip(coords, coords[1:])]
-            result.append(Path(coords[0], lines, transform, tag=="polygon"))
+            coords = list(zip(coords[::2], coords[1::2]))
+            lines = [StraightLine(np.subtract(p2,p1)) for p1,p2 in zip(coords, coords[1:])]
+            result.append(Path(coords[0], lines, tag=="polygon", transform))
         elif tag == "path":
             d = attr.get("d", "")
             result += parse_paths(d, transform, child.sourceline)
