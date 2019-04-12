@@ -13,7 +13,8 @@ parser = ArgParser("svgkerfer [options] <input files>", "Adds kerf adjustments t
 #colors = DictOption(["-c", "--color"], "hex_code", "kerf", lambda x:int(x, 16), lambda x:float(x), "Adds kerf adjustment to all strokes of the given color")
 default = NormalOption(["-d", "--default"], ["kerf"], "Adds a default kerf adjustment")
 inverted = NormalOption(["-i", "--invert"], [], "Inverts whats insides and outsides")
-granularity = NormalOption(["-g"], ["granularity"], "Units per line when curves are converted. Default: .05", .05)
+granularity = NormalOption(["-g"], ["granularity"], "Line segments per curve / ellipse. Default:200", 200)
+epsilon = NormalOption(["-e"], ["epsilon"], "Minimum distance between two distingt points. Default: 0", 0)
 output = NormalOption(["-o", "--output"], ["path"], "Format for output files. Default: '%s'"%(outdef), outdef)
 recursive = NormalOption(["-r", "--recursive"], [], "Allow converting entire directories")
 
@@ -22,14 +23,12 @@ parser.take_args(argv[1:])
 
 io = get_input_output_list(parser.get_the_rest(), recursive=recursive.is_set(), output=output.get_option())
 
-try:
-    gran = float(granularity.get_option())
-except:
-    error("Not a float: ", granularity.get_option())
+gran = float(granularity.get_option())
+epsi = float(epsilon.get_option())
 
 for inp, out in io:
     print(inp, "->", out)
     paths = paths_of_svg_file(inp)
-    polylines = polylines_of_paths(paths, gran)
+    polylines = polylines_of_paths(paths, gran, epsi)
 
     draw_polylines(polylines)

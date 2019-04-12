@@ -16,7 +16,7 @@ def transform(trans, p):
     p = np.asarray(p).reshape(-1)
     return p[:2]
 
-def polyline_of_path(path, granularity):
+def polyline_of_path(path, granularity, epsilon):
     points = []
 
     current_point = path.start_point
@@ -31,13 +31,13 @@ def polyline_of_path(path, granularity):
     points = [transform(path.transform, p) for p in points]
 
     if path.connected:
-        points = [p for p,p2 in zip(points, points[1:]+points[:1]) if dist(p, p2)>granularity/10]
+        points = [p for p,p2 in zip(points, points[1:]+points[:1]) if dist(p, p2)>epsilon]
     else:
         last_point = points[-1]
-        points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>granularity/10]
+        points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>epsilon]
         points.append(last_point)
 
     return Polyline(points, path.connected)
 
-def polylines_of_paths(paths, granularity):
-    return [polyline_of_path(path, granularity) for path in paths]
+def polylines_of_paths(paths, granularity, epsilon):
+    return [polyline_of_path(path, granularity, epsilon) for path in paths]
