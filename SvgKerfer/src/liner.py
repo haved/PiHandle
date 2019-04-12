@@ -16,17 +16,26 @@ def transform(trans, p):
     p = np.asarray(p).reshape(-1)
     return p[:2]
 
+class LinerVisitor:
+    def __init__(self, granularity):
+        self.granularity = granularity
+
+    def set_current_point(self, point):
+        self.current_point = point
+
+    def straight_line(self, line):
+        return [np.add(self.current_point, line.relative_target)]
+
+    def arc(self, arc):
+        return []
+
 def polyline_of_path(path, granularity, epsilon):
-    points = []
+    points = [path.start_point]
 
-    current_point = path.start_point
-    points.append(current_point)
-
+    visitor = LinerVisitor(granularity)
     for line in path.lines:
-        new_point = np.add(current_point, line.relative_target)
-        #TODO: Divide up arcs and beziers, use the eigenvalue of the transform to scale the granularity
-        points.append(new_point)
-        current_point = new_point
+        visitor.set_current_point(points[-1])
+        points += line.visit(visitor)
 
     points = [transform(path.transform, p) for p in points]
 
