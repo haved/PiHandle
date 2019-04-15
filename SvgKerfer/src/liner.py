@@ -60,7 +60,7 @@ class LinerVisitor:
         AB_circle = np.subtract(B_circle, A_circle)
         k = [-AB_circle[1], AB_circle[0]] #Rotate 90 degrees to the left
         if right_of_AB:
-            k = -k
+            k = np.dot(k, -1)
         k = normalize(k) #Orthogonal to AB_circle
 
         #Distance from AB line segment to center
