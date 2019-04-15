@@ -14,7 +14,7 @@ parser = ArgParser("svgkerfer [options] <input files>", "Adds kerf adjustments t
 default = NormalOption(["-d", "--default"], ["kerf"], "Adds a default kerf adjustment")
 inverted = NormalOption(["-i", "--invert"], [], "Inverts whats insides and outsides")
 granularity = NormalOption(["-g"], ["granularity"], "Line segments per curve / ellipse. Default:200", 200)
-epsilon = NormalOption(["-e"], ["epsilon"], "Minimum distance between two distingt points. Default: 0", 0)
+epsilon = NormalOption(["-e"], ["epsilon"], "Minimum distance between two distingt points. Default: .0", 0)
 output = NormalOption(["-o", "--output"], ["path"], "Format for output files. Default: '%s'"%(outdef), outdef)
 recursive = NormalOption(["-r", "--recursive"], [], "Allow converting entire directories")
 
@@ -23,7 +23,7 @@ parser.take_args(argv[1:])
 
 io = get_input_output_list(parser.get_the_rest(), recursive=recursive.is_set(), output=output.get_option())
 
-gran = float(granularity.get_option())
+gran = int(granularity.get_option())
 epsi = float(epsilon.get_option())
 
 for inp, out in io:

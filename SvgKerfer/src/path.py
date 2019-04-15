@@ -24,10 +24,11 @@ class CubeBez:
 
 
 class Arc:
-    def __init__(self, relative_target, rx, ry, big_sweep_flag, pos_dir_flag):
+    def __init__(self, relative_target, rx, ry, rot, big_sweep_flag, pos_dir_flag):
         self.relative_target = relative_target
         self.rx = rx
         self.ry = ry
+        self.rot = rot
         self.big_sweep_flag = big_sweep_flag
         self.pos_dir_flag = pos_dir_flag
 

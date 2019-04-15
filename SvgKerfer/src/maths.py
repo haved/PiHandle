@@ -1,5 +1,6 @@
 import numpy as np
-from math import sin, cos, tan, radians
+from numpy.linalg import norm
+from math import sin, cos, tan, radians, degrees, atan2
 
 def matrix(a, b, c, d, e, f):
     return np.matrix([[a, b, c], [d, e, f], [0, 0, 1]])
@@ -20,3 +21,6 @@ def skewX(a):
 def skewY(a):
     a = radians(a)
     return np.matrix([[1, 0, 0], [tan(a), 1, 0], [0, 0, 1]])
+
+def angle(v1, v2):
+    return degrees(atan2(*v1)-atan2(*v2))
