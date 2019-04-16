@@ -4,6 +4,7 @@ from arg_parser import warning, error
 from inspect import signature, Parameter
 from maths import *
 from path import *
+from path_parser import parse_paths
 import re
 
 def get_pos_or_error(text, needle, pos, linenum):
@@ -43,99 +44,6 @@ def parse_transform(text, linenum):
         progress = end
 
     return trans
-
-def parse_paths(text, transform, linenum):
-    result = []
-
-    parts = re.findall(r"-?[0-9]*\.?[0-9]*|[A-Za-z]", text)
-
-    current_path_start = [0,0]
-    current_path_lines = []
-
-    def finish_path(connect):
-        nonlocal current_path_lines, current_coord
-        if len(current_path_lines) != 0:
-            result.append(Path(current_path_start, current_path_lines, connect, transform))
-            current_path_lines = []
-        if connect:
-            current_coord = current_path_start
-
-    current_coord = [0,0]
-
-    parts = list(filter(lambda x:x!="", parts))
-
-    def pop_part():
-        nonlocal parts
-        if len(parts) == 0:
-            return None
-        ret, *parts = parts
-        return ret
-
-    def get_float_opt():
-        nonlocal parts
-        if len(parts) == 0:
-            return None
-        try:
-            front, *rest = parts
-            front = float(front)
-            parts = rest
-            return front
-        except:
-            return None
-
-    def get_coord_opt(relative=False):
-        x, y = [get_float_opt(), get_float_opt()]
-        if x == None or y == None:
-            return None
-        return [x + current_coord[0], y + current_coord[1]] if relative else [x, y]
-
-    while len(parts):
-        p = pop_part()
-        relative = p.islower()
-        cmd = p.lower()
-
-        if cmd == "m":
-            current_coord = get_coord_opt(relative)
-            finish_path(False) #We finish any path we might be currently doing
-            current_path_start = current_coord
-            cmd = "l"
-
-        if cmd == "z":
-            finish_path(True)
-        elif cmd == "l":
-            while True:
-                coord = get_coord_opt(relative)
-                if not coord:
-                    break
-
-                diff = np.subtract(coord, current_coord)
-                current_path_lines.append(StraightLine(diff))
-                current_coord = coord
-
-        elif cmd == "h":
-            while True:
-                x = get_float_opt()
-                if not coord:
-                    break
-                line_len = x if relative else x-current_coord[0]
-                current_path_lines.append(StraightLine([line_len, 0]))
-                current_coord[0] += line_len
-        elif cmd == "v":
-            while True:
-                y = get_float_opt()
-                if not coord:
-                    break
-                line_len = y if relative else y-current_coord[1]
-                current_path_lines.append(StraightLine([0, line_len]))
-                current_coord[1] += line_len
-        elif cmd == "c" or cmd=="s" or cmd=="q" or cmd=="t" or cmd=="a":
-            pass
-        else:
-            warning(linenum, ": Ignoring path data: ", p, sep="")
-
-    finish_path(False)
-
-    return result
 
 def get_floats(attr, *names):
     def pf(val):

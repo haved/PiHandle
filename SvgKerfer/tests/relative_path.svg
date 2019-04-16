@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="800mm" height="480mm" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <g stroke="#660000" stroke-width="3" fill="none">
+	<path d="m 100,100 l 100,0  0,100 z l 0,100 c 0,100 200,100 200,0 z"/>
+	<path d="m 100,300 l 100,0  m 100,0 l 0,100 -100,0 z"/>
+  </g>
+</svg>

@@ -74,9 +74,6 @@ class LinerVisitor:
         SA_angle = maths.angle([1, 0], SA_circle)
         SB_angle = maths.angle([1, 0], SB_circle)
 
-        print("SA_angle: ", SA_angle)
-        print("SB_angle: ", SB_angle)
-
         result = []
         for i in range(1, self.granularity):
             part = i / self.granularity
@@ -86,8 +83,6 @@ class LinerVisitor:
             angle = SA_angle + diff*part
             angle = radians(angle)
             result.append(np.add(center_circle, [cos(angle)*radius, sin(angle)*radius]))
-
-        print("Done")
 
         return [transform(inverse_circle, x) for x in result]
 

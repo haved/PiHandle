@@ -8,7 +8,9 @@ class StraightLine:
         return visitor.straight_line(self)
 
 class QuadBez:
-    def __init__(self, relative_target):
+    def __init__(self, p1, p2, relative_target):
+        self.p1 = p1
+        self.p2 = p2
         self.relative_target = relative_target
 
     def visit(self, visitor):
