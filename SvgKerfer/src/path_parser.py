@@ -18,6 +18,7 @@ def parse_paths(text, transform, linenum):
             current_coord = current_path_start
 
     current_coord = [0,0]
+    prev_helper_coord = current_coord
 
     parts = list(filter(lambda x:x!="", parts))
 
@@ -56,6 +57,7 @@ def parse_paths(text, transform, linenum):
         p = pop_part()
         relative = p.islower()
         cmd = p.lower()
+        helper_coord_set = False
 
         if cmd == "m":
             current_coord = get_global_coord_opt(relative)
@@ -90,15 +92,26 @@ def parse_paths(text, transform, linenum):
                     break
                 current_coord[1] += y
                 current_path_lines.append(StraightLine([0, y]))
-        elif cmd == "c":
+        elif cmd == "c" or cmd == "s":
             while True:
-                p1 = get_relative_coord_opt(relative)
+                p1 = get_relative_coord_opt(relative) if cmd == "c" else np.dot(prev_helper_coord, -1)
                 p2 = get_relative_coord_opt(relative)
                 relative_target = get_relative_coord_opt(relative)
-                if not target:
+                if not relative_target:
                     break
-                current_path_lines.append(QuadBez(p1, p2, relative_target))
+                current_path_lines.append(CubeBez(p1, p2, relative_target))
                 current_coord = np.add(current_coord, relative_target)
+                helper_coord_set = True
+                prev_helper_coord = np.subtract(relative_target, p2)
+        elif cmd == "q" or cmd == "t":
+            while True:
+                p = get_relative_coord_opt(relative) if cmd == "q" else np.dot(prev_helper_coord, -1)
+                relative_target = get_relative_coord_opt(relative)
+                if not relative_target:
+                    break
+                current_path_lines.append(QuadBez(p, relative_target))
+                helper_coord_set = True
+                prev_helper_coord = np.subtract(relative_target, p)
         elif cmd == "a":
             while True:
                 rx, ry = get_float_opt(), get_float_opt()
@@ -113,6 +126,8 @@ def parse_paths(text, transform, linenum):
                 current_coord = np.add(current_coord, relative_target)
         else:
             warning(linenum, ": Ignoring path data: ", p, sep="")
+        if not helper_coord_set:
+            prev_helper_coord = current_coord
 
     finish_path(False)
 

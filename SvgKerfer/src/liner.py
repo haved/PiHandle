@@ -75,7 +75,7 @@ class LinerVisitor:
         SB_angle = maths.angle([1, 0], SB_circle)
 
         result = []
-        for i in range(1, self.granularity):
+        for i in range(1, self.granularity+1):
             part = i / self.granularity
             diff = (SB_angle - SA_angle) % 360
             if not pos_dir_flag:
@@ -85,6 +85,30 @@ class LinerVisitor:
             result.append(np.add(center_circle, [cos(angle)*radius, sin(angle)*radius]))
 
         return [transform(inverse_circle, x) for x in result]
+
+    def quad_bez(self, qb):
+        b = self.current_point
+        p = np.add(b, qb.p)
+        e = np.add(b, qb.relative_target)
+        def func(t):
+            sm = np.dot(b, (1-t)**2)
+            sm = np.add(sm, np.dot(p, 2*(1-t)*t))
+            sm = np.add(sm, np.dot(e, t**2))
+
+        return [func(i/self.granularity) for i in range(1, self.granularity+1)]
+
+    def cube_bez(self, cb):
+        b = self.current_point
+        p1 = np.add(b, cb.p1)
+        p2 = np.add(b, cb.p2)
+        e = np.add(b, cb.relative_target)
+        def func(t):
+            sm = np.dot(b, (1-t)**3)
+            sm = np.add(sm, np.dot(p1, 3*(1-t)**2*t))
+            sm = np.add(sm, np.dot(p2, 3*(1-t)*t**2))
+            sm = np.add(sm, np.dot(e, t**3))
+
+        return [func(i/self.granularity) for i in range(1, self.granularity+1)]
 
 def polyline_of_path(path, granularity, epsilon):
     points = [path.start_point]
