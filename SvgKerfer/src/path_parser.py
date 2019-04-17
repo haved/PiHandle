@@ -96,10 +96,9 @@ def parse_paths(text, transform, linenum):
                 if not target:
                     break
                 current_path_lines.append(CubeBez(p1, p2, target))
-                current_coord = np.add(current_coord, relative_target)
+                current_coord = target
                 helper_vector_set = True
                 prev_helper_vector = np.subtract(p2, target)
-                current_coord = target
         elif cmd == "q" or cmd == "t":
             while True:
                 p = get_coord_opt(relative) if cmd == "q" else np.subtract(current_coord, prev_helper_vector)
@@ -107,9 +106,9 @@ def parse_paths(text, transform, linenum):
                 if not target:
                     break
                 current_path_lines.append(QuadBez(p, target))
+                current_coord = target
                 helper_vector_set = True
                 prev_helper_vector = np.subtract(p, target)
-                current_coord = target
         elif cmd == "a":
             while True:
                 rx, ry = get_float_opt(), get_float_opt()

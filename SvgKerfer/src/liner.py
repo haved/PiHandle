@@ -90,6 +90,7 @@ class LinerVisitor:
             sm = np.dot(b, (1-t)**2)
             sm = np.add(sm, np.dot(p, 2*(1-t)*t))
             sm = np.add(sm, np.dot(e, t**2))
+            return sm
 
         return [func(i/self.granularity) for i in range(1, self.granularity+1)]
 
@@ -103,6 +104,7 @@ class LinerVisitor:
             sm = np.add(sm, np.dot(p1, 3*(1-t)**2*t))
             sm = np.add(sm, np.dot(p2, 3*(1-t)*t**2))
             sm = np.add(sm, np.dot(e, t**3))
+            return sm
 
         return [func(i/self.granularity) for i in range(1, self.granularity+1)]
 

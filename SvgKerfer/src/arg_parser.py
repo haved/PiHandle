@@ -30,6 +30,9 @@ class NormalOption(BaseOption):
         if self.custom_func:
             return self.custom_func(args)
 
+        if len(args) == 1:
+            args = args[0]
+
         if self.allow_multiple:
             self.values.append(args)
         else:
