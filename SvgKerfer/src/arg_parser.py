@@ -38,7 +38,7 @@ class NormalOption(BaseOption):
         else:
             self.values = args
 
-        return len(args) #How many args we used
+        return len(self.arg_names)
 
     def get_help_row(self):
         return [", ".join(self.names), " ".join(self.arg_names), self.desc]

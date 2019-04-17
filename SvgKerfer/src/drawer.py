@@ -38,6 +38,8 @@ def draw_polylines(polylines):
         canvas.create_line(tx(x1), ty(y1), tx(x2), ty(y2))
 
     for line in polylines:
+        if len(line.points) < 2:
+            continue
         for p1, p2 in zip(line.points, line.points[1:]):
             plot(*p1, *p2)
         if line.connected:
