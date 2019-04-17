@@ -1,16 +1,11 @@
-import tkinter as tk
 
-WIDTH=800
-HEIGHT=480
+minX = None
+minY = None
+maxX = None
+maxY = None
 
-def draw_polylines(polylines):
-    root = tk.Tk()
-    canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT)
-
-    minX = None
-    minY = None
-    maxX = None
-    maxY = None
+def plot_polylines(polylines, frame_width, frame_height, plot_fun, margin=10):
+    global minX, minY, maxX, maxY
 
     for line in polylines:
         for x,y in line.points:
@@ -26,16 +21,16 @@ def draw_polylines(polylines):
     width = maxX-minX
     height = maxY-minY
 
-    ratio = min((WIDTH-20)/width, (HEIGHT-20)/height)
+    ratio = min((frame_width-2*margin)/width, (frame_height-2*margin)/height)
 
     def tx(x):
-        return (x-minX)*ratio+10
+        return (x-minX)*ratio+margin
 
     def ty(y):
-        return (y-minY)*ratio+10
+        return (y-minY)*ratio+margin
 
     def plot(x1, y1, x2, y2):
-        canvas.create_line(tx(x1), ty(y1), tx(x2), ty(y2))
+        plot_fun(tx(x1), ty(y1), tx(x2), ty(y2))
 
     for line in polylines:
         if len(line.points) < 2:
@@ -45,7 +40,16 @@ def draw_polylines(polylines):
         if line.connected:
             plot(*line.points[-1], *line.points[0])
 
-    canvas.pack()
+from PIL import Image, ImageDraw
 
-    root.mainloop()
+def draw_polylines_to_image_file(polylines, filename, width, height, bgcolor="#FFFFFF", stroke="#000000", strokewidth=2):
+    img = Image.new('RGB', (width, height), color=bgcolor)
 
+    draw = ImageDraw.Draw(img)
+
+    def plot(*ps):
+        draw.line(ps, fill=stroke, width=strokewidth)
+
+    plot_polylines(polylines, width, height, plot_fun=plot)
+
+    img.save(filename)
