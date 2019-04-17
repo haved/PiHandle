@@ -18,7 +18,7 @@ def parse_paths(text, transform, linenum):
             current_coord = current_path_start
 
     current_coord = [0,0]
-    prev_helper_coord = current_coord
+    prev_helper_vector = [0,0]
 
     parts = list(filter(lambda x:x!="", parts))
 
@@ -41,26 +41,20 @@ def parse_paths(text, transform, linenum):
         except:
             return None
 
-    def get_global_coord_opt(relative):
+    def get_coord_opt(relative):
         x, y = [get_float_opt(), get_float_opt()]
         if x == None or y == None:
             return None
         return [x + current_coord[0], y + current_coord[1]] if relative else [x, y]
 
-    def get_relative_coord_opt(relative):
-        x, y = [get_float_opt(), get_float_opt()]
-        if x == None or y == None:
-            return None
-        return [x, y] if relative else [x - current_coord[0], y - current_coord[1]]
-
     while len(parts):
         p = pop_part()
         relative = p.islower()
         cmd = p.lower()
-        helper_coord_set = False
+        helper_vector_set = False
 
         if cmd == "m":
-            current_coord = get_global_coord_opt(relative)
+            current_coord = get_coord_opt(relative)
             finish_path(False) #We finish any path we might be currently doing
             current_path_start = current_coord
             cmd = "l"
@@ -69,12 +63,12 @@ def parse_paths(text, transform, linenum):
             finish_path(True)
         elif cmd == "l":
             while True:
-                relative_target = get_relative_coord_opt(relative)
-                if not relative_target:
+                target = get_coord_opt(relative)
+                if not target:
                     break
 
-                current_path_lines.append(StraightLine(relative_target))
-                current_coord = np.add(current_coord, relative_target)
+                current_path_lines.append(StraightLine(target))
+                current_coord = target
 
         elif cmd == "h":
             while True:
@@ -84,50 +78,54 @@ def parse_paths(text, transform, linenum):
                 if not relative:
                     current_coord[0] = 0
                 current_coord[0] += x
-                current_path_lines.append(StraightLine([x, 0]))
+                current_path_lines.append(StraightLine(current_coord))
         elif cmd == "v":
             while True:
                 y = get_float_opt()
                 if not y:
                     break
+                if not relative:
+                    current_coord[1] = 0
                 current_coord[1] += y
-                current_path_lines.append(StraightLine([0, y]))
+                current_path_lines.append(StraightLine(current_coord))
         elif cmd == "c" or cmd == "s":
             while True:
-                p1 = get_relative_coord_opt(relative) if cmd == "c" else np.dot(prev_helper_coord, -1)
-                p2 = get_relative_coord_opt(relative)
-                relative_target = get_relative_coord_opt(relative)
-                if not relative_target:
+                p1 = get_coord_opt(relative) if cmd == "c" else np.subtract(current_coord, prev_helper_vector)
+                p2 = get_coord_opt(relative)
+                target = get_coord_opt(relative)
+                if not target:
                     break
-                current_path_lines.append(CubeBez(p1, p2, relative_target))
+                current_path_lines.append(CubeBez(p1, p2, target))
                 current_coord = np.add(current_coord, relative_target)
-                helper_coord_set = True
-                prev_helper_coord = np.subtract(relative_target, p2)
+                helper_vector_set = True
+                prev_helper_vector = np.subtract(p2, target)
+                current_coord = target
         elif cmd == "q" or cmd == "t":
             while True:
-                p = get_relative_coord_opt(relative) if cmd == "q" else np.dot(prev_helper_coord, -1)
-                relative_target = get_relative_coord_opt(relative)
-                if not relative_target:
+                p = get_coord_opt(relative) if cmd == "q" else np.subtract(current_coord, prev_helper_vector)
+                target = get_coord_opt(relative)
+                if not target:
                     break
-                current_path_lines.append(QuadBez(p, relative_target))
-                helper_coord_set = True
-                prev_helper_coord = np.subtract(relative_target, p)
+                current_path_lines.append(QuadBez(p, target))
+                helper_vector_set = True
+                prev_helper_vector = np.subtract(p, target)
+                current_coord = target
         elif cmd == "a":
             while True:
                 rx, ry = get_float_opt(), get_float_opt()
                 x_axis_rot = get_float_opt()
                 large_arc_flag = get_float_opt() != 0.0
                 pos_dir_flag = get_float_opt() != 0.0
-                relative_target = get_relative_coord_opt(relative)
-                if not relative_target:
+                target = get_coord_opt(relative)
+                if not target:
                     break
 
-                current_path_lines.append(Arc(relative_target, rx, ry, x_axis_rot, large_arc_flag, pos_dir_flag))
-                current_coord = np.add(current_coord, relative_target)
+                current_path_lines.append(Arc(target, rx, ry, x_axis_rot, large_arc_flag, pos_dir_flag))
+                current_coord = target
         else:
             warning(linenum, ": Ignoring path data: ", p, sep="")
-        if not helper_coord_set:
-            prev_helper_coord = current_coord
+        if not helper_vector_set:
+            prev_helper_vector = [0,0]
 
     finish_path(False)
 

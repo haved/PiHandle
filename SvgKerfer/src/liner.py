@@ -32,15 +32,15 @@ class LinerVisitor:
         self.current_point = point
 
     def straight_line(self, line):
-        return [np.add(self.current_point, line.relative_target)]
+        return [line.target]
 
     def arc(self, arc):
         p1 = self.current_point
-        p2 = np.add(p1, arc.relative_target)
+        p2 = arc.target
         rx, ry = abs(arc.rx), abs(arc.ry)
         rot = arc.rot % 360
-        big_sweep_flag = float(arc.big_sweep_flag) != 0
-        pos_dir_flag = float(arc.pos_dir_flag) != 0
+        big_sweep_flag = bool(arc.big_sweep_flag)
+        pos_dir_flag = bool(arc.pos_dir_flag)
 
         if all(c1==c2 for c1,c2 in zip(p1, p2)):
             return []
@@ -67,10 +67,10 @@ class LinerVisitor:
         center = np.add(center, np.dot(np.add(p1, p2), .5))
 
         def angle_to(p):
-            return maths.angle([0,1], np.divide(np.subtract(p, center_prime), [rx, ry]))
+            return maths.angle([1,0], np.divide(np.subtract(p, center_prime), [rx, ry]))
 
-        p1_prime_angle = angle_to(p1_prime)
-        p2_prime_angle = angle_to(np.dot(p1_prime, -1))
+        p1_prime_angle = angle_to(p1_prime) % 360
+        p2_prime_angle = angle_to(np.dot(p1_prime, -1)) % 360
 
         angle_diff = (p2_prime_angle - p1_prime_angle) % 360
         if not pos_dir_flag:
@@ -84,8 +84,8 @@ class LinerVisitor:
 
     def quad_bez(self, qb):
         b = self.current_point
-        p = np.add(b, qb.p)
-        e = np.add(b, qb.relative_target)
+        p = qb.p
+        e = qb.target
         def func(t):
             sm = np.dot(b, (1-t)**2)
             sm = np.add(sm, np.dot(p, 2*(1-t)*t))
@@ -95,9 +95,9 @@ class LinerVisitor:
 
     def cube_bez(self, cb):
         b = self.current_point
-        p1 = np.add(b, cb.p1)
-        p2 = np.add(b, cb.p2)
-        e = np.add(b, cb.relative_target)
+        p1 = cb.p1
+        p2 = cb.p2
+        e = cb.target
         def func(t):
             sm = np.dot(b, (1-t)**3)
             sm = np.add(sm, np.dot(p1, 3*(1-t)**2*t))

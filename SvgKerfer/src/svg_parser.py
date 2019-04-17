@@ -63,27 +63,29 @@ def extract_paths(parent_transform, dom):
             result += extract_paths(transform, child)
         elif tag == "circle":
             cx, cy, r = get_floats(attr, "cx", "cy", "r")
-            result.append(Path([cx+r, cy], [Arc([-2*r, 0], r, r, 0, True, True), Arc([2*r, 0], r, r, 0, True, True)], True, transform))
+            result.append(Path([cx+r, cy], [Arc([cx-r, 0], r, r, 0, True, True), Arc([cx+r, 0], r, r, 0, True, True)], True, transform))
         elif tag == "ellipse":
             cx, cy, rx, ry = get_floats(attr, "cx", "cy", "rx", "ry")
-            result.append(Path([cx+rx, cy], [Arc([-2*rx, 0], rx, ry, 0, True, True), Arc([2*rx, 0], rx, ry, 0, True, True)], True, transform)) #TODO
+            result.append(Path([cx+rx, cy], [Arc([cx-rx, 0], rx, ry, 0, True, True), Arc([cx+rx, 0], rx, ry, 0, True, True)], True, transform))
         elif tag == "rect":
             x, y, width, height, rx, ry = get_floats(attr, "x", "y", "width", "height", "rx", "ry")
             has_rounded_corners = "rx" in attr or "ry" in attr
             lines = []
+            x2 = x + width
+            y2 = y + height
             start_point = [x+rx, y]
-            lines.append(StraightLine([width-rx*2, 0]))
+            lines.append(StraightLine([x2-rx, y]))
             if has_rounded_corners:
-                lines.append(Arc([rx, ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
-            lines.append(StraightLine([0, height-ry*2]))
+                lines.append(Arc([x2, y+ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
+            lines.append(StraightLine([x2, y2-ry]))
             if has_rounded_corners:
-                lines.append(Arc([-rx, ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
-            lines.append(StraightLine([-width+rx*2, 0]))
+                lines.append(Arc([x2-rx, y2], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
+            lines.append(StraightLine([x+rx, y2]))
             if has_rounded_corners:
-                lines.append(Arc([-rx, -ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
-            lines.append(StraightLine([0, -height+ry*2]))
+                lines.append(Arc([x, y2-ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
+            lines.append(StraightLine([x, y+ry]))
             if has_rounded_corners:
-                lines.append(Arc([rx, -ry], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
+                lines.append(Arc([x+rx, y], rx, ry, 0, big_sweep_flag=False, pos_dir_flag=True))
             result.append(Path(start_point, lines, True, transform))
         elif tag == "polygon" or tag == "polyline":
             points = attr.get("points", "")
@@ -92,7 +94,7 @@ def extract_paths(parent_transform, dom):
             if len(coords) < 2:
                 continue
             coords = list(zip(coords[::2], coords[1::2]))
-            lines = [StraightLine(np.subtract(p2,p1)) for p1,p2 in zip(coords, coords[1:])]
+            lines = [StraightLine(p1) for p1 in coords[1:]]
             result.append(Path(coords[0], lines, tag=="polygon", transform))
         elif tag == "path":
             d = attr.get("d", "")
@@ -101,7 +103,7 @@ def extract_paths(parent_transform, dom):
             x1, y1, x2, y2 = get_floats(attr, "x1", "y1", "x2", "y2")
             p1 = [x1, y1]
             p2 = [x2, y2]
-            result.append(Path(p1, [StraightLine(np.subtract(p2,p1))], False, transform))
+            result.append(Path(p1, [StraightLine(p2)], False, transform))
         elif tag == "title":
             print(child.sourceline, ": <title>",child.text,"</title>",sep="")
         else:

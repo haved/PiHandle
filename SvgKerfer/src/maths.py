@@ -3,7 +3,7 @@ from numpy.linalg import norm
 from math import sin, cos, tan, radians, degrees, atan2
 
 def matrix(a, b, c, d, e, f):
-    return np.matrix([[a, b, c], [d, e, f], [0, 0, 1]])
+    return np.matrix([[a, c, e], [b, d, f], [0, 0, 1]])
 def translate(x, y=0):
     return np.matrix([[1, 0, x], [0, 1, y], [0, 0, 1]])
 def scale(sx, sy=None):

@@ -4,7 +4,7 @@
 <svg width="800mm" height="480mm" viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" version="1.1">
   <g stroke="#660000" stroke-width="3" fill="none" transform="translate(50, 50)">
 	<rect width="300" height="300"/>
-	<path d="M 150,0 a 150,150, 0,1,0 150,150"/>
+	<path d="M 150,0 a 150,150, 0 0,1 150,150"/>
 	<path d="M 0,150 l 150,0 0,150"/>
   </g>
 </svg>
