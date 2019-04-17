@@ -65,8 +65,8 @@ def extract_paths(parent_transform, dom):
             cx, cy, r = get_floats(attr, "cx", "cy", "r")
             result.append(Path([cx+r, cy], [Arc([-2*r, 0], r, r, 0, True, True), Arc([2*r, 0], r, r, 0, True, True)], True, transform))
         elif tag == "ellipse":
-            cx, cy, rx, ry = extract_paths(attr, "cx", "cy", "rx", "ry")
-            result.append(Path([cx+r, cy], Arc([0, 0], rx, ry, True, True), True, transform)) #TODO
+            cx, cy, rx, ry = get_floats(attr, "cx", "cy", "rx", "ry")
+            result.append(Path([cx+rx, cy], [Arc([-2*rx, 0], rx, ry, 0, True, True), Arc([2*rx, 0], rx, ry, 0, True, True)], True, transform)) #TODO
         elif tag == "rect":
             x, y, width, height, rx, ry = get_floats(attr, "x", "y", "width", "height", "rx", "ry")
             has_rounded_corners = "rx" in attr or "ry" in attr

@@ -23,4 +23,4 @@ def skewY(a):
     return np.matrix([[1, 0, 0], [tan(a), 1, 0], [0, 0, 1]])
 
 def angle(v1, v2):
-    return degrees(atan2(*v1)-atan2(*v2))
+    return degrees(atan2(*v2[::-1]) - atan2(*v1[::-1]))

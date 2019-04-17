@@ -35,56 +35,52 @@ class LinerVisitor:
         return [np.add(self.current_point, line.relative_target)]
 
     def arc(self, arc):
-        A = self.current_point
-        B = np.add(A, arc.relative_target)
-        rx, ry = arc.rx, arc.ry
-        rot = arc.rot
-        big_sweep_flag = arc.big_sweep_flag
-        pos_dir_flag = arc.pos_dir_flag
+        p1 = self.current_point
+        p2 = np.add(p1, arc.relative_target)
+        rx, ry = abs(arc.rx), abs(arc.ry)
+        rot = arc.rot % 360
+        big_sweep_flag = float(arc.big_sweep_flag) != 0
+        pos_dir_flag = float(arc.pos_dir_flag) != 0
+
+        if all(c1==c2 for c1,c2 in zip(p1, p2)):
+            return []
 
         if rx==0 or ry==0:
             return [B] #Just a straight line to the end
 
-        right_of_AB = big_sweep_flag ^ (not pos_dir_flag)
+        rot_trans = maths.rotate(rot)
+        rot_trans_inv = maths.rotate(-rot)
 
-        y_scale = rx/ry
+        p1_prime = np.dot(np.subtract(p1, p2), .5)
+        p1_prime = transform(rot_trans_inv, p1_prime)
 
-        circle_space = maths.rotate(-rot) @ maths.scale(1, y_scale)
-        inverse_circle = maths.scale(1, 1/y_scale) @ maths.rotate(rot)
-        A_circle = transform(circle_space, A)
-        B_circle = transform(circle_space, B)
+        center_fac = 1 if big_sweep_flag != pos_dir_flag else -1
+        center_dist = (rx*ry)**2 - (rx*p1_prime[1])**2 - (ry*p1_prime[0])**2
+        center_dist /= (rx*p1_prime[1])**2 + (ry*p1_prime[0])**2
+        if center_dist < 0:
+            center_dist = 0
+        center_dist = center_fac * sqrt(center_dist)
 
-        #Now we are working with a circle of radius rx
-        radius = rx
+        center_prime = np.multiply([rx/ry, -ry/rx], p1_prime[::-1])
+        center_prime = np.dot(center_prime, center_dist)
+        center = transform(rot_trans, center_prime)
+        center = np.add(center, np.dot(np.add(p1, p2), .5))
 
-        AB_circle = np.subtract(B_circle, A_circle)
-        k = [-AB_circle[1], AB_circle[0]] #Rotate 90 degrees to the left
-        if right_of_AB:
-            k = np.dot(k, -1)
-        k = normalize(k) #Orthogonal to AB_circle
+        def angle_to(p):
+            return maths.angle([0,1], np.divide(np.subtract(p, center_prime), [rx, ry]))
 
-        #Distance from AB line segment to center
-        k_len = sqrt(radius**2 - (norm(AB_circle)/2)**2)
-        center_circle = A_circle + AB_circle/2 + np.multiply(k, k_len)
+        p1_prime_angle = angle_to(p1_prime)
+        p2_prime_angle = angle_to(np.dot(p1_prime, -1))
 
-        SA_circle = np.subtract(A_circle, center_circle)
-        SB_circle = np.subtract(B_circle, center_circle)
+        angle_diff = (p2_prime_angle - p1_prime_angle) % 360
+        if not pos_dir_flag:
+            angle_diff -= 360
 
-        #Angle from center to points in degrees
-        SA_angle = maths.angle([1, 0], SA_circle)
-        SB_angle = maths.angle([1, 0], SB_circle)
+        def angle_to_point(angle):
+            rad = radians(angle)
+            return np.add(transform(rot_trans, [rx*cos(rad), ry*sin(rad)]), center)
 
-        result = []
-        for i in range(1, self.granularity+1):
-            part = i / self.granularity
-            diff = (SB_angle - SA_angle) % 360
-            if not pos_dir_flag:
-                diff -= 360
-            angle = SA_angle + diff*part
-            angle = radians(angle)
-            result.append(np.add(center_circle, [cos(angle)*radius, sin(angle)*radius]))
-
-        return [transform(inverse_circle, x) for x in result]
+        return [angle_to_point(p1_prime_angle + angle_diff * i / self.granularity) for i in range(1, self.granularity+1) ]
 
     def quad_bez(self, qb):
         b = self.current_point
