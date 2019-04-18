@@ -42,7 +42,7 @@ def plot_polylines(polylines, frame_width, frame_height, plot_fun, margin=10):
 
 from PIL import Image, ImageDraw
 
-def draw_polylines_to_image_file(polylines, filename, width, height, bgcolor="#FFFFFF", stroke="#000000", strokewidth=2):
+def draw_polylines_to_image(polylines, width, height, bgcolor="#FFFFFF", stroke="#000000", strokewidth=2):
     img = Image.new('RGB', (width, height), color=bgcolor)
 
     draw = ImageDraw.Draw(img)
@@ -52,4 +52,4 @@ def draw_polylines_to_image_file(polylines, filename, width, height, bgcolor="#F
 
     plot_polylines(polylines, width, height, plot_fun=plot)
 
-    img.save(filename)
+    return img

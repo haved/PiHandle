@@ -118,14 +118,15 @@ def polyline_of_path(path, granularity, epsilon):
 
     points = [transform(path.transform, p) for p in points]
 
+    fewer_points = points[0:1]
+    for p2 in points:
+        if dist(fewer_points[-1], p2) > epsilon:
+            fewer_points.append(p2)
     if path.connected:
-        points = [p for p,p2 in zip(points, points[1:]+points[:1]) if dist(p, p2)>epsilon]
-    else:
-        last_point = points[-1]
-        points = [p for p,p2 in zip(points, points[1:]) if dist(p, p2)>epsilon]
-        points.append(last_point)
+        while len(fewer_points) and (dist(fewer_points[0], fewer_points[-1]) <= epsilon):
+            fewer_points.pop()
 
-    return Polyline(points, path.connected)
+    return Polyline(fewer_points, path.connected)
 
 def polylines_of_paths(paths, granularity, epsilon):
     return [polyline_of_path(path, granularity, epsilon) for path in paths]

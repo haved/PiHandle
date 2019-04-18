@@ -64,7 +64,7 @@ def parse_paths(text, transform, linenum):
         elif cmd == "l":
             while True:
                 target = get_coord_opt(relative)
-                if not target:
+                if target==None:
                     break
 
                 current_path_lines.append(StraightLine(target))
@@ -73,27 +73,23 @@ def parse_paths(text, transform, linenum):
         elif cmd == "h":
             while True:
                 x = get_float_opt()
-                if not x:
+                if x==None:
                     break
-                if not relative:
-                    current_coord[0] = 0
-                current_coord[0] += x
+                current_coord = np.add(current_coord, [x, 0]) if relative else [x, 0]
                 current_path_lines.append(StraightLine(current_coord))
         elif cmd == "v":
             while True:
                 y = get_float_opt()
-                if not y:
+                if y==None:
                     break
-                if not relative:
-                    current_coord[1] = 0
-                current_coord[1] += y
+                current_coord = np.add(current_coord, [0, y]) if relative else [0, y]
                 current_path_lines.append(StraightLine(current_coord))
         elif cmd == "c" or cmd == "s":
             while True:
                 p1 = get_coord_opt(relative) if cmd == "c" else np.subtract(current_coord, prev_helper_vector)
                 p2 = get_coord_opt(relative)
                 target = get_coord_opt(relative)
-                if not target:
+                if target==None:
                     break
                 current_path_lines.append(CubeBez(p1, p2, target))
                 current_coord = target
@@ -103,7 +99,7 @@ def parse_paths(text, transform, linenum):
             while True:
                 p = get_coord_opt(relative) if cmd == "q" else np.subtract(current_coord, prev_helper_vector)
                 target = get_coord_opt(relative)
-                if not target:
+                if target==None:
                     break
                 current_path_lines.append(QuadBez(p, target))
                 current_coord = target
@@ -116,7 +112,7 @@ def parse_paths(text, transform, linenum):
                 large_arc_flag = get_float_opt() != 0.0
                 pos_dir_flag = get_float_opt() != 0.0
                 target = get_coord_opt(relative)
-                if not target:
+                if target==None:
                     break
 
                 current_path_lines.append(Arc(target, rx, ry, x_axis_rot, large_arc_flag, pos_dir_flag))

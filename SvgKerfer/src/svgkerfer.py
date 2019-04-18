@@ -5,7 +5,7 @@ from logger import *
 from filehandler import get_input_output_list
 from svg_parser import paths_of_svg_file
 from liner import polylines_of_paths
-from drawer import draw_polylines_to_image_file
+from drawer import draw_polylines_to_image
 
 outdef = "kerfed/%.svg"
 
@@ -31,14 +31,14 @@ for inp, out in io:
     print(inp, "->", out)
     paths = paths_of_svg_file(inp)
 
-    for i in range(0, 100):
-        epsilon = (i/15)**3.2
+    polylines = polylines_of_paths(paths, gran, epsi)
+
+    #if display.is_set():
+    #    draw_polylines_to_image(polylines, 800, 480, strokewidth=1).show()
+
+    for i in range(200):
+        epsilon = (i/14)**2.7
         polylines = polylines_of_paths(paths, gran, epsilon)
         filename = "anim/image{}.jpg".format(i)
         print("Saving:", filename)
-        draw_polylines_to_image_file(polylines, filename, 1920*2, 1080*2, strokewidth=4)
-
-    #polylines = polylines_of_paths(paths, gran, epsi)
-#
-    #if display.is_set():
-        #draw_polylines_to_window(polylines)
+        draw_polylines_to_image(polylines, 1920*2, 1080*2, strokewidth=4).save(filename)
