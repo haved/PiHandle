@@ -4,8 +4,9 @@ from arg_parser import *
 from logger import *
 from filehandler import get_input_output_list
 from svg_parser import paths_of_svg_file
-from liner import polylines_of_paths
+from liner import polys_of_paths
 from drawer import *
+from crossfinder import crosses_among_polys
 
 outdef = "kerfed/%.svg"
 
@@ -31,29 +32,27 @@ for inp, out in io:
     print(inp, "->", out)
     paths = paths_of_svg_file(inp)
 
-    polylines = polylines_of_paths(paths, gran, epsi) #Polylines may be connected, in which case they are polygons
-    polygons_only = [p for p in polylines if p.connected]
-    polylines_only = [p for p in polylines if not p.connected]
+    polys = polys_of_paths(paths, gran, epsi)
+    polygons = [p for p in polys if p.connected]
+    polylines = [p for p in polys if not p.connected]
 
-    if len(polylines_only) != 0:
+    if len(polylines) != 0:
         warning("Polylines found, will not be kerf adjusted: Display?")
         if input_yn(default=False):
             image = make_image(800, 480)
-            bounding_box = get_bounding_box(polylines)
-            assert(bounding_box)
-            draw_polylines_to_image(image, polygons_only, bounding_box, strokewidth=1, stroke="black")
-            draw_polylines_to_image(image, polylines_only, bounding_box, strokewidth=2, stroke="red")
+            bounding_box = get_bounding_box(polys)
+            draw_polylines_to_image(image, polygons, bounding_box, strokewidth=1, stroke="black")
+            draw_polylines_to_image(image, polylines, bounding_box, strokewidth=2, stroke="red")
             image.show()
 
-    crossings = crosses_among_polylines(polygons_only)
+    crossings = crosses_among_polys(polygons)
 
     if len(crossings) != 0:
         error("Crossing lines were found among the polygons. Do you want to see?", end="", fatal=False)
         if input_yn(default=True):
             image = make_image(800, 480)
-            bounding_box = get_bounding_box(polylines)
-            assert(bounding_box)
-            draw_polylines_to_image(image, polylines, bounding_box, strokewidth=1, stroke="black")
+            bounding_box = get_bounding_box(polys)
+            draw_polylines_to_image(image, polys, bounding_box, strokewidth=1, stroke="black")
             cross_polylines = [line for c in crossings for line in c.to_polylines()]
             draw_polylines_to_image(image, crossings, bounding_box, strokewidth=2, stoke="red")
             image.show()
@@ -61,7 +60,10 @@ for inp, out in io:
 
     #TODO: Separate polygons into inside and outside egdes
 
-
     if display.is_set():
-        draw_polylines_to_image(polylines, 800, 480, strokewidth=1).show()
+        #TODO: Kerf adjusted polys
+        info("Showing result...")
+        draw_polylines_to_image(make_image(800, 480), polys, get_bounding_box(polys), strokewidth=1).show()
+
+    info("Done")
 

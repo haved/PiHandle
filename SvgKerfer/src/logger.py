@@ -9,3 +9,7 @@ def warning(*a, **aa):
     print("Warning:", end=' ')
     print(*a, **aa)
 
+def info(*a, **aa):
+    print("Info:", end=' ')
+    print(*a, **aa)
+

@@ -4,10 +4,11 @@ from numpy.linalg import norm
 import maths
 from math import sin, cos, sqrt, radians
 
-class Polyline:
+class Poly:
     def __init__(self, points, connected):
         self.points = points
         self.connected = connected
+        assert(len(points))
 
 def dist(p1, p2):
     return norm(np.subtract(p1,p2))
@@ -108,7 +109,7 @@ class LinerVisitor:
 
         return [func(i/self.granularity) for i in range(1, self.granularity+1)]
 
-def polyline_of_path_opt(path, granularity, epsilon):
+def poly_of_path_opt(path, granularity, epsilon):
     points = [path.start_point]
     assert(path.lines)
 
@@ -131,12 +132,7 @@ def polyline_of_path_opt(path, granularity, epsilon):
         warning("Some paths were completely eaten up by epsilon")
         return None
 
-    return Polyline(fewer_points, path.connected)
+    return Poly(fewer_points, path.connected)
 
-def polylines_of_paths(paths, granularity, epsilon):
-    result = []
-    for path in paths:
-        line = polyline_of_path_opt(path, granularity, epsilon)
-        if line:
-            result.append(line)
-    return result
+def polys_of_paths(paths, granularity, epsilon):
+    return [poly for poly in [poly_of_path_opt(path, granularity, epsilon) for path in paths] if poly!=None]
