@@ -1,33 +1,31 @@
 
-minX = None
-minY = None
-maxX = None
-maxY = None
+def get_bounding_box(polylines):
+    minX = minY = maxX = maxY = None
 
-def plot_polylines(polylines, frame_width, frame_height, plot_fun, margin=10):
-    global minX, minY, maxX, maxY
-
-    for line in polylines:
-        for x,y in line.points:
+    for polyline in polylines:
+        for x,y in polyline.points:
             minX = min(minX, x) if minX else x
-            minY = min(minY, y) if minY else y
             maxX = max(maxX, x) if maxX else x
+            minY = min(minY, y) if minY else y
             maxY = max(maxY, y) if maxY else y
 
     if minX == None:
-        warning("Svg empty, nothing to show")
-        return
+        return None
 
-    width = maxX-minX
-    height = maxY-minY
+    return [[minX, maxX], [minY, maxY]]
+
+def plot_polylines(polylines, frame_width, frame_height, bounding_box, margin, plot_fun):
+
+    width = bounding_box[0][1]-bounding_box[0][0]
+    height = bounding_box[1][1]-bounding_box[1][0]
 
     ratio = min((frame_width-2*margin)/width, (frame_height-2*margin)/height)
 
     def tx(x):
-        return (x-minX)*ratio+margin
+        return (x-bounding_box[0][0])*ratio+margin
 
     def ty(y):
-        return (y-minY)*ratio+margin
+        return (y-bounding_box[1][0])*ratio+margin
 
     def plot(x1, y1, x2, y2):
         plot_fun(tx(x1), ty(y1), tx(x2), ty(y2))
@@ -42,14 +40,15 @@ def plot_polylines(polylines, frame_width, frame_height, plot_fun, margin=10):
 
 from PIL import Image, ImageDraw
 
-def draw_polylines_to_image(polylines, width, height, bgcolor="#FFFFFF", stroke="#000000", strokewidth=2):
-    img = Image.new('RGB', (width, height), color=bgcolor)
+def make_image(width, height, bgcolor="#FFFFFF"):
+    return Image.new('RGB', (width, height), color=bgcolor)
 
+def draw_polylines_to_image(img, polylines, bounding_box, margin=10, stroke="#000000", strokewidth=2):
     draw = ImageDraw.Draw(img)
 
     def plot(*ps):
         draw.line(ps, fill=stroke, width=strokewidth)
 
-    plot_polylines(polylines, width, height, plot_fun=plot)
+    plot_polylines(polylines, img.width, img.height, bounding_box, margin=margin, plot_fun=plot)
 
     return img

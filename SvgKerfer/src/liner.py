@@ -108,8 +108,9 @@ class LinerVisitor:
 
         return [func(i/self.granularity) for i in range(1, self.granularity+1)]
 
-def polyline_of_path(path, granularity, epsilon):
+def polyline_of_path_opt(path, granularity, epsilon):
     points = [path.start_point]
+    assert(path.lines)
 
     visitor = LinerVisitor(granularity)
     for line in path.lines:
@@ -126,7 +127,16 @@ def polyline_of_path(path, granularity, epsilon):
         while len(fewer_points) and (dist(fewer_points[0], fewer_points[-1]) <= epsilon):
             fewer_points.pop()
 
+    if len(fewer_points) == 0:
+        warning("Some paths were completely eaten up by epsilon")
+        return None
+
     return Polyline(fewer_points, path.connected)
 
 def polylines_of_paths(paths, granularity, epsilon):
-    return [polyline_of_path(path, granularity, epsilon) for path in paths]
+    result = []
+    for path in paths:
+        line = polyline_of_path_opt(path, granularity, epsilon)
+        if line:
+            result.append(line)
+    return result

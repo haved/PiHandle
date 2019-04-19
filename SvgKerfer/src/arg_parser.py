@@ -129,3 +129,16 @@ class ArgParser:
             print("\t", " \t".join([row[i].ljust(widths[i]) for i in range(3)]), sep="")
         print()
         exit(exit_code)
+
+def input_yn(default):
+    while True:
+        print(" [Y/n]" if default else " [y/N]", end=": ")
+        answer = input()
+        if answer in ["y", "Y", "yes", "Yes", "YES"]:
+            return True
+        elif answer in ["n", "N", "no", "No", "NO"]:
+            return False
+        elif len(answer) == 0:
+            return default
+        else:
+            print("Unrecognized answer, try again:", end="")
