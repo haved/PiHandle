@@ -37,7 +37,7 @@ for inp, out in io:
     polylines = [p for p in polys if not p.connected]
 
     if len(polylines) != 0:
-        warning("Polylines found, will not be kerf adjusted: Display?")
+        warning("Polylines found, will not be kerf adjusted: Display?", end="")
         if input_yn(default=False):
             image = make_image(800, 480)
             bounding_box = get_bounding_box(polys)
@@ -54,7 +54,7 @@ for inp, out in io:
             bounding_box = get_bounding_box(polys)
             draw_polylines_to_image(image, polys, bounding_box, strokewidth=1, stroke="black")
             cross_polylines = [line for c in crossings for line in c.to_polylines()]
-            draw_polylines_to_image(image, crossings, bounding_box, strokewidth=2, stoke="red")
+            draw_polylines_to_image(image, cross_polylines, bounding_box, strokewidth=2, stroke="red")
             image.show()
         error("Aborting due to previous error")
 
