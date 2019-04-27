@@ -56,6 +56,9 @@ def crosses_among_polys(polys):
         if poly.connected and len(poly.points) > 2:
             all_lines.append((poly.points[-1], poly.points[0]))
 
+    if len(all_lines) > 1000:
+        print("Given", len(all_lines), "line segments. Checking for crosses")
+
     for l1, l2 in combinations(all_lines, 2):
         if cross(l1, l2):
             crosses.append(Cross(l1, l2))
