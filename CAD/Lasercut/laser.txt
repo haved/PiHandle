@@ -1,0 +1,16 @@
+For 3mm acryllic:
+4% speed
+100% power
+100% freq
+.255mm kerf radius
+
+Engraving: I don't remember
+Tip: Engrave backside of clear acryllic
+
+For 2mm acryllic:
+10% speed
+100% power
+100% freq
+.15mm kerf radius
+
+Some documents have color coding

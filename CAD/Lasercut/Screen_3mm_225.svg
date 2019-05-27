@@ -1,0 +1,169 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="279mm" height="204.2mm" viewBox="0 0 279 204.2">
+<g transform="translate(0, 204.2)">
+<g transform="scale(1, -1)">
+<g transform="translate(139.5, 102.1)">
+<path d="M 5.5 -6.925 A 1.025 1.025 0 0 1 6.525 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 6.525 -5.9 A 1.025 1.025 0 0 1 5.5 -4.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.5 -4.875 A 1.025 1.025 0 0 1 4.475 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 4.475 -5.9 A 1.025 1.025 0 0 1 5.5 -6.925" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="-90.775" x2="12.825" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="-96.875" x2="18.575" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="18.575" y1="-96.875" x2="18.575" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="18.575" y1="-90.325" x2="12.825" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="-90.325" x2="12.825" y2="-90.775" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 6.525 -97.1 A 1.025 1.025 0 0 1 5.5 -96.075" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.5 -96.075 A 1.025 1.025 0 0 1 4.475 -97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 4.475 -97.1 A 1.025 1.025 0 0 1 5.5 -98.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.5 -98.125 A 1.025 1.025 0 0 1 6.525 -97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="121.875" y1="-96.875" x2="127.175" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="127.175" y1="-96.875" x2="127.175" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="127.175" y1="-90.325" x2="121.425" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="121.425" y1="-90.325" x2="121.425" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="121.425" y1="-96.875" x2="121.875" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.651 -96.525 A 1.025 1.025 0 0 1 133.925 -97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.925 -97.949 A 1.025 1.025 0 0 1 135.349 -97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.349 -97.675 A 1.025 1.025 0 0 1 135.075 -96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.075 -96.251 A 1.025 1.025 0 0 1 133.651 -96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.925 -6.749 A 1.025 1.025 0 0 1 135.349 -6.475" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.349 -6.475 A 1.025 1.025 0 0 1 135.075 -5.051" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.075 -5.051 A 1.025 1.025 0 0 1 133.651 -5.325" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.651 -5.325 A 1.025 1.025 0 0 1 133.925 -6.749" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="1.725" y1="-6.916" x2="1.725" y2="-97.1" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 1.725 -97.1 A 3.775 3.775 0 0 1 5.5 -100.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="5.5" y1="-100.875" x2="134.5" y2="-100.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 134.5 -100.875 A 3.775 3.775 0 0 1 138.275 -97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="138.275" y1="-97.1" x2="138.275" y2="-5.9" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 138.275 -5.9 A 3.775 3.775 0 0 1 134.5 -2.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="134.5" y1="-2.125" x2="5.5" y2="-2.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.5 -2.125 A 3.775 3.775 0 0 1 1.725 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="1.725" y1="-5.9" x2="1.725" y2="-6.916" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -5.5 -6.925 A 1.025 1.025 0 0 1 -4.475 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.475 -5.9 A 1.025 1.025 0 0 1 -5.5 -4.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -5.5 -4.875 A 1.025 1.025 0 0 1 -6.525 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.525 -5.9 A 1.025 1.025 0 0 1 -5.5 -6.925" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-14.825" y1="-83.325" x2="-14.825" y2="-17.725" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-14.825" y1="-17.725" x2="-125.175" y2="-17.725" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-125.175" y1="-17.725" x2="-125.175" y2="-83.775" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-125.175" y1="-83.775" x2="-14.825" y2="-83.775" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-14.825" y1="-83.775" x2="-14.825" y2="-83.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-12.825" y1="-90.775" x2="-12.825" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-12.825" y1="-90.325" x2="-18.575" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-18.575" y1="-90.325" x2="-18.575" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-18.575" y1="-96.875" x2="-12.825" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-12.825" y1="-96.875" x2="-12.825" y2="-90.775" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.349 -96.525 A 1.025 1.025 0 0 1 -6.075 -97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.075 -97.949 A 1.025 1.025 0 0 1 -4.651 -97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.651 -97.675 A 1.025 1.025 0 0 1 -4.925 -96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.925 -96.251 A 1.025 1.025 0 0 1 -6.349 -96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="-96.425" x2="-121.425" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="-90.325" x2="-127.175" y2="-90.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-127.175" y1="-90.325" x2="-127.175" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-127.175" y1="-96.875" x2="-121.425" y2="-96.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="-96.875" x2="-121.425" y2="-96.425" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.925 -96.251 A 1.025 1.025 0 0 1 -135.349 -96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.349 -96.525 A 1.025 1.025 0 0 1 -135.075 -97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.075 -97.949 A 1.025 1.025 0 0 1 -133.651 -97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.651 -97.675 A 1.025 1.025 0 0 1 -133.925 -96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -134.5 -6.925 A 1.025 1.025 0 0 1 -133.475 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.475 -5.9 A 1.025 1.025 0 0 1 -134.5 -4.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -134.5 -4.875 A 1.025 1.025 0 0 1 -135.525 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.525 -5.9 A 1.025 1.025 0 0 1 -134.5 -6.925" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-57.275" y1="-93.325" x2="-57.275" y2="-93.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-57.275" y1="-93.875" x2="-32.125" y2="-93.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-32.125" y1="-93.875" x2="-32.125" y2="-93.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-32.125" y1="-93.325" x2="-57.275" y2="-93.325" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-9.81" y1="-2.125" x2="-134.5" y2="-2.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -134.5 -2.125 A 3.775 3.775 0 0 1 -138.275 -5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-138.275" y1="-5.9" x2="-138.275" y2="-97.1" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -138.275 -97.1 A 3.775 3.775 0 0 1 -134.5 -100.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-134.5" y1="-100.875" x2="-5.5" y2="-100.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -5.5 -100.875 A 3.775 3.775 0 0 1 -1.725 -97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-1.725" y1="-97.1" x2="-1.725" y2="-5.9" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -1.725 -5.9 A 3.775 3.775 0 0 1 -5.5 -2.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-5.5" y1="-2.125" x2="-9.81" y2="-2.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.075 5.051 A 1.025 1.025 0 0 1 -4.651 5.325" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.651 5.325 A 1.025 1.025 0 0 1 -4.925 6.749" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.925 6.749 A 1.025 1.025 0 0 1 -6.349 6.475" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.349 6.475 A 1.025 1.025 0 0 1 -6.075 5.051" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-13.303" y1="12.675" x2="-18.575" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-18.575" y1="12.675" x2="-18.575" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-18.575" y1="6.125" x2="-12.825" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-12.825" y1="6.125" x2="-12.825" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-12.825" y1="12.675" x2="-13.303" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-67.275" y1="17.125" x2="-9.725" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-9.725" y1="17.125" x2="-9.725" y2="92.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-9.725" y1="92.875" x2="-130.275" y2="92.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-130.275" y1="92.875" x2="-130.275" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-130.275" y1="17.125" x2="-67.275" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="8.125" x2="-121.425" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="12.675" x2="-127.175" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-127.175" y1="12.675" x2="-127.175" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-127.175" y1="6.125" x2="-121.425" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-121.425" y1="6.125" x2="-121.425" y2="8.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.925 6.749 A 1.025 1.025 0 0 1 -135.349 6.475" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.349 6.475 A 1.025 1.025 0 0 1 -135.075 5.051" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.075 5.051 A 1.025 1.025 0 0 1 -133.651 5.325" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.651 5.325 A 1.025 1.025 0 0 1 -133.925 6.749" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.651 96.525 A 1.025 1.025 0 0 1 -133.925 97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -133.925 97.949 A 1.025 1.025 0 0 1 -135.349 97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.349 97.675 A 1.025 1.025 0 0 1 -135.075 96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -135.075 96.251 A 1.025 1.025 0 0 1 -133.651 96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.075 96.251 A 1.025 1.025 0 0 1 -4.651 96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.651 96.525 A 1.025 1.025 0 0 1 -4.925 97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -4.925 97.949 A 1.025 1.025 0 0 1 -6.349 97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -6.349 97.675 A 1.025 1.025 0 0 1 -6.075 96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-1.725" y1="64.208" x2="-1.725" y2="97.1" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -1.725 97.1 A 3.775 3.775 0 0 1 -5.5 100.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-5.5" y1="100.875" x2="-134.5" y2="100.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -134.5 100.875 A 3.775 3.775 0 0 1 -138.275 97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-138.275" y1="97.1" x2="-138.275" y2="5.9" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -138.275 5.9 A 3.775 3.775 0 0 1 -134.5 2.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-134.5" y1="2.125" x2="-5.5" y2="2.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M -5.5 2.125 A 3.775 3.775 0 0 1 -1.725 5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="-1.725" y1="5.9" x2="-1.725" y2="64.208" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 6.075 6.749 A 1.025 1.025 0 0 1 4.651 6.475" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 4.651 6.475 A 1.025 1.025 0 0 1 4.925 5.051" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 4.925 5.051 A 1.025 1.025 0 0 1 6.349 5.325" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 6.349 5.325 A 1.025 1.025 0 0 1 6.075 6.749" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="12.197" x2="12.825" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="6.125" x2="18.575" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="18.575" y1="6.125" x2="18.575" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="18.575" y1="12.675" x2="12.825" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="12.825" y1="12.675" x2="12.825" y2="12.197" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="69.725" y1="17.125" x2="130.275" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="130.275" y1="17.125" x2="130.275" y2="92.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="130.275" y1="92.875" x2="9.725" y2="92.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="9.725" y1="92.875" x2="9.725" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="9.725" y1="17.125" x2="69.725" y2="17.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="127.175" y1="7.125" x2="127.175" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="127.175" y1="12.675" x2="121.425" y2="12.675" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="121.425" y1="12.675" x2="121.425" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="121.425" y1="6.125" x2="127.175" y2="6.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="127.175" y1="6.125" x2="127.175" y2="7.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.651 6.475 A 1.025 1.025 0 0 1 133.925 5.051" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.925 5.051 A 1.025 1.025 0 0 1 135.349 5.325" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.349 5.325 A 1.025 1.025 0 0 1 135.075 6.749" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.075 6.749 A 1.025 1.025 0 0 1 133.651 6.475" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.925 96.251 A 1.025 1.025 0 0 1 135.349 96.525" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.349 96.525 A 1.025 1.025 0 0 1 135.075 97.949" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 135.075 97.949 A 1.025 1.025 0 0 1 133.651 97.675" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 133.651 97.675 A 1.025 1.025 0 0 1 133.925 96.251" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 6.525 97.093 A 1.025 1.025 0 0 1 5.507 98.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.507 98.125 A 1.025 1.025 0 0 1 4.475 97.107" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 4.475 97.107 A 1.025 1.025 0 0 1 5.493 96.075" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.493 96.075 A 1.025 1.025 0 0 1 6.525 97.093" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="6.525" y1="100.875" x2="5.5" y2="100.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 5.5 100.875 A 3.775 3.775 0 0 1 1.725 97.1" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="1.725" y1="97.1" x2="1.725" y2="5.9" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 1.725 5.9 A 3.775 3.775 0 0 1 5.5 2.125" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="5.5" y1="2.125" x2="134.5" y2="2.125" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 134.5 2.125 A 3.775 3.775 0 0 1 138.275 5.9" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="138.275" y1="5.9" x2="138.275" y2="97.1" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<path d="M 138.275 97.1 A 3.775 3.775 0 0 1 134.5 100.875" fill="none" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+<line x1="134.5" y1="100.875" x2="6.525" y2="100.875" stroke="rgb(0,0,255)" stroke-width="0.0254"/>
+</g>
+</g>
+</g>
+</svg>
+
